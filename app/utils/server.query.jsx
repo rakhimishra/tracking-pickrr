@@ -1,4 +1,4 @@
-import { ActionFunction } from '@remix-run/node'; // or "@remix-run/cloudflare"
+// import { ActionFunction } from '@remix-run/node'; // or "@remix-run/cloudflare"
 import { redirect } from '@remix-run/node'; // or "@remix-run/cloudflare"
 
 // Note the "action" export name, this will handle our form POST

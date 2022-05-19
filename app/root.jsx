@@ -1,12 +1,12 @@
-import { Outlet, LiveReload, Link, Links, Meta, useLoaderData } from 'remix';
-import globalStylesUrl from '~/styles/global.css';
+import { Outlet, LiveReload, Link, Links, Meta, useLoaderData } from "remix";
+import globalStylesUrl from "~/styles/global.css";
 // import { getUser } from '~/utils/session.server';
-
-export const links = () => [{ rel: 'stylesheet', href: globalStylesUrl }];
+import PickrrHeader from "~/page-components/pickrr-header";
+export const links = () => [{ rel: "stylesheet", href: globalStylesUrl }];
 
 export const meta = () => {
-  const description = 'A cool blog built with Remix';
-  const keywords = 'remix, react, javascript';
+  const description = "A cool blog built with Remix";
+  const keywords = "remix, react, javascript";
 
   return {
     description,
@@ -39,12 +39,13 @@ function Document({ children, title }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
+        {typeof document === "undefined" ? "__STYLES__" : null}
         <Links />
         <title>Pickrr Tracking Page</title>
       </head>
       <body>
         {children}
-        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
       </body>
     </html>
   );
@@ -55,7 +56,7 @@ function Layout({ children }) {
 
   return (
     <>
-      <nav className="navbar">
+      {/* <nav className="navbar">
         <Link to="/" className="logo">
           Pickrr
         </Link>
@@ -63,9 +64,9 @@ function Layout({ children }) {
         <ul className="nav">
           <li></li>
         </ul>
-      </nav>
-
+      </nav> */}
       <div className="container">{children}</div>
+     
     </>
   );
 }
