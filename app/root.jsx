@@ -1,8 +1,10 @@
 import { Outlet, LiveReload, Link, Links, Meta, useLoaderData } from "remix";
 import globalStylesUrl from "~/styles/global.css";
-// import { getUser } from '~/utils/session.server';
-import PickrrHeader from "~/page-components/pickrr-header";
-export const links = () => [{ rel: "stylesheet", href: globalStylesUrl }];
+import antdStyles from "antd/dist/antd.css";
+export const links = () => [
+  { rel: "stylesheet", href: antdStyles },
+  { rel: "stylesheet", href: globalStylesUrl },
+];
 
 export const meta = () => {
   const description = "A cool blog built with Remix";
@@ -13,14 +15,6 @@ export const meta = () => {
     keywords,
   };
 };
-
-// export const loader = async ({ request }) => {
-//   const user = await getUser(request);
-//   const data = {
-//     user,
-//   };
-//   return data;
-// };
 
 export default function App() {
   return (
@@ -66,7 +60,6 @@ function Layout({ children }) {
         </ul>
       </nav> */}
       <div className="container">{children}</div>
-     
     </>
   );
 }

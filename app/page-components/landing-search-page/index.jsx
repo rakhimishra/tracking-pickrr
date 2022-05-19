@@ -1,5 +1,6 @@
 import PickrrHeader from "../pickrr-header";
 import { Footer, MainContainer, LandingSearchPageContainer } from "./style";
+import { Button } from "antd";
 function LandingSearchPage() {
   return (
     <LandingSearchPageContainer>
@@ -11,6 +12,7 @@ function LandingSearchPage() {
           You can find tracking ID in the email and SMS alerts you received from
           us upon order confirmation.
         </div>
+        <Button type="primary">Primary Button</Button>
       </MainContainer>
       <Footer src="https://d10srchmli830n.cloudfront.net/1652867194453_e3b1cfc2-46b6-4959-b1e5-c2d02f51c30a_Group-27611.svg" />
     </LandingSearchPageContainer>
