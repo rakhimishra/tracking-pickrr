@@ -1,15 +1,15 @@
 import styled from "styled-components";
+import { Button } from "antd";
 export const Footer = styled.img`
   width: 100%;
-  position: absolute;
   bottom: 0;
 `;
 
 export const MainContainer = styled.div`
-  max-width: 960px;
+  max-width: 1050px;
   width: 100%;
-  padding: 70px;
   margin: 0 auto;
+  padding: 70px;
   .title {
     font-style: normal;
     font-weight: 700;
@@ -20,14 +20,20 @@ export const MainContainer = styled.div`
   }
   .subtitle {
     margin-top: 39px;
-    font-style: normal;
-    font-size: 30px;
-    line-height: 37px;
-    color: #38446d;
   }
   .support-text {
     font-weight: 400;
     font-size: 14px;
+    color: #38446d;
+    margin-bottom: 15px;
+  }
+  .input-button-container {
+    display: flex;
+  }
+  .powered {
+    text-align: center;
+    margin-top: 85px;
+    text-decoration-line: underline;
     color: #38446d;
   }
 `;
@@ -37,4 +43,18 @@ export const LandingSearchPageContainer = styled.div`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
+`;
+export const CustomButton = styled(Button)`
+  width: 216px !important;
+  height: 49px !important;
+  background: linear-gradient(
+    105.06deg,
+    #ff4c4a -5.19%,
+    #ff756c 32.99%,
+    #f16242 57.37%,
+    #da4040 97.18%,
+    #ce2500 116.5%,
+    #9a0200 150.8%
+  ) !important;
+  border-radius: 10px !important;
 `;

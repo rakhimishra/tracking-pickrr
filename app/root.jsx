@@ -1,13 +1,22 @@
-import { Outlet, LiveReload, Link, Links, Meta, useLoaderData } from "remix";
+// import { Outlet, LiveReload, Scripts, Links, Meta, useLoaderData } from "remix";
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  useLoaderData,
+} from "@remix-run/react";
 import globalStylesUrl from "~/styles/global.css";
 import antdStyles from "antd/dist/antd.css";
+import PickrrHeader from "./page-components/pickrr-header";
 export const links = () => [
   { rel: "stylesheet", href: antdStyles },
   { rel: "stylesheet", href: globalStylesUrl },
 ];
 
 export const meta = () => {
-  const description = "A cool blog built with Remix";
+  const description = "Pickrr Tracking page";
   const keywords = "remix, react, javascript";
 
   return {
@@ -38,7 +47,9 @@ function Document({ children, title }) {
         <title>Pickrr Tracking Page</title>
       </head>
       <body>
-        {children}
+        <PickrrHeader />
+        <div className="container"> {children}</div>
+        <Scripts />
         {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
       </body>
     </html>
