@@ -52,7 +52,6 @@ function Document({ children, title }) {
         <Links />
       </head>
       <body>
-        <PickrrHeader />
         <div className="container"> {children}</div>
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
@@ -66,7 +65,11 @@ function Layout({ children }) {
 
   return (
     <>
-      <div className="container">{children}</div>
+      <div className="container">
+        {' '}
+        <PickrrHeader />
+        {children}
+      </div>
     </>
   );
 }
