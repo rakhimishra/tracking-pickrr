@@ -1,4 +1,4 @@
-import { Outlet, LiveReload, Links, Meta } from "remix";
+import { Outlet, LiveReload, Links, Meta } from 'remix';
 import {
   // Links,
   // LiveReload,
@@ -6,18 +6,20 @@ import {
   // Outlet,
   Scripts,
   useLoaderData,
-} from "@remix-run/react";
-import globalStylesUrl from "~/styles/global.css";
-import antdStyles from "antd/dist/antd.css";
-import PickrrHeader from "./page-components/pickrr-header";
+} from '@remix-run/react';
+import { useContext } from 'react';
+import globalStylesUrl from '~/styles/global.css';
+import antdStyles from 'antd/dist/antd.css';
+import PickrrHeader from './page-components/pickrr-header';
+import StylesContext from './styles-context';
 export const links = () => [
-  { rel: "stylesheet", href: antdStyles },
-  { rel: "stylesheet", href: globalStylesUrl },
+  { rel: 'stylesheet', href: antdStyles },
+  { rel: 'stylesheet', href: globalStylesUrl },
 ];
 
 export const meta = () => {
-  const description = "Pickrr Tracking page";
-  const keywords = "remix, react, javascript";
+  const description = 'Pickrr Tracking page';
+  const keywords = 'remix, react, javascript';
 
   return {
     description,
@@ -36,23 +38,24 @@ export default function App() {
 }
 
 function Document({ children, title }) {
+  const styles = useContext(StylesContext);
+
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {/* <link rel="icon" href="/favicon.png" type="image/png" /> */}
+        {title ? <title>{title}</title> : null}
         <Meta />
-        {typeof document === "undefined" ? "__STYLES__" : null}
-
+        {typeof document === 'undefined' ? '__STYLES__' : null}
+        {styles}
         <Links />
-        <title>Pickrr Tracking Page</title>
       </head>
       <body>
         <PickrrHeader />
         <div className="container"> {children}</div>
-
-        {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
-        {/* <Scripts /> */}
+        <Scripts />
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );

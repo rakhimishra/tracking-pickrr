@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "@remix-run/react";
+import React, { useState } from 'react';
+import { Link } from '@remix-run/react';
 import {
   Footer,
   MainContainer,
   LandingSearchPageContainer,
   CustomButton,
-} from "./style";
+} from './style';
 // import { useHistory } from "react-router-dom";
-import { CustomInput, Title } from "~/components/UIElements";
+import { CustomInput, Title } from '~/components/UIElements';
 function LandingSearchPage() {
   // const history = useHistory();
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
   console.log(input);
   return (
