@@ -12,4 +12,7 @@ export const MainContainer = styled.div`
   .input-button-containe {
     display: flex;
   }
+  .order-info-container {
+    margin-top: 30px;
+  }
 `;

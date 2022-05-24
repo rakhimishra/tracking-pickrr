@@ -2,6 +2,7 @@ import { Link, redirect, useLoaderData } from "remix";
 import { getTrackingDetails } from "~/utils/server.query";
 import { Title, CustomInput, CustomButton } from "~/components/UIElements";
 import { MainContainer, Container } from "./style";
+import OrderInfocontainer from "~/components/OrderInfoContainer";
 
 export const loader = async ({ request, params }) => {
   console.log(params);
@@ -25,6 +26,10 @@ function TrackingDetails() {
             style={{ marginRight: 10, width: "769px" }}
           />
           <CustomButton type="danger">Track Order</CustomButton>
+          <div className="order-info-container">
+            {" "}
+            <OrderInfocontainer />
+          </div>
         </div>
       </MainContainer>
     </Container>

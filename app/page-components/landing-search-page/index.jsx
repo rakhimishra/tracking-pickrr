@@ -1,19 +1,22 @@
 import React, { useState } from "react";
+// import { Link } from "@remix-run/react";
 import {
   Footer,
   MainContainer,
   LandingSearchPageContainer,
   CustomButton,
 } from "./style";
-
+// import { useHistory } from "react-router-dom";
 import { CustomInput, Title } from "~/components/UIElements";
-function LandingSearchPage() {
+function LandingSearchPage({ Link }) {
+  // const history = useHistory();
   const [input, setInput] = useState("");
 
-  const handleClick = () => {
-    console.log("button clicked");
-    history.push(`/tracking/${input}`);
-  };
+  // const handleClick = () => {
+  //   console.log("button clicked");
+  //   history.push(`/tracking/${input}`);
+  // };
+  console.log(input);
   return (
     <LandingSearchPageContainer>
       <MainContainer>
@@ -27,11 +30,14 @@ function LandingSearchPage() {
           <CustomInput
             style={{ marginRight: 10 }}
             placeholder="Enter Tracking ID (Comma separated if multiple)"
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setInput(e.target.value);
+            }}
           />
-          <CustomButton type="primary" onClick={handleClick}>
-            Track Order
-          </CustomButton>
+          <Link to={`/tracking/${input}`}>
+            <CustomButton type="primary">Track Order</CustomButton>
+          </Link>
         </div>
         <div className="powered">Powered by Pickrr </div>
       </MainContainer>

@@ -1,9 +1,9 @@
-// import { Outlet, LiveReload, Scripts, Links, Meta, useLoaderData } from "remix";
+import { Outlet, LiveReload, Links, Meta } from "remix";
 import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
+  // Links,
+  // LiveReload,
+  // Meta,
+  // Outlet,
   Scripts,
   useLoaderData,
 } from "@remix-run/react";
@@ -43,14 +43,16 @@ function Document({ children, title }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         {typeof document === "undefined" ? "__STYLES__" : null}
+
         <Links />
         <title>Pickrr Tracking Page</title>
       </head>
       <body>
         <PickrrHeader />
         <div className="container"> {children}</div>
-        <Scripts />
+
         {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
+        {/* <Scripts /> */}
       </body>
     </html>
   );
@@ -61,15 +63,6 @@ function Layout({ children }) {
 
   return (
     <>
-      {/* <nav className="navbar">
-        <Link to="/" className="logo">
-          Pickrr
-        </Link>
-
-        <ul className="nav">
-          <li></li>
-        </ul>
-      </nav> */}
       <div className="container">{children}</div>
     </>
   );
