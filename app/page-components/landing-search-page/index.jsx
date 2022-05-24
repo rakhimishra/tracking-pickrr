@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import {
   Footer,
   MainContainer,
@@ -8,14 +8,10 @@ import {
 } from "./style";
 // import { useHistory } from "react-router-dom";
 import { CustomInput, Title } from "~/components/UIElements";
-function LandingSearchPage({ Link }) {
+function LandingSearchPage() {
   // const history = useHistory();
   const [input, setInput] = useState("");
 
-  // const handleClick = () => {
-  //   console.log("button clicked");
-  //   history.push(`/tracking/${input}`);
-  // };
   console.log(input);
   return (
     <LandingSearchPageContainer>

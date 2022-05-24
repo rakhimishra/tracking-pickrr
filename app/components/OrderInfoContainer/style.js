@@ -13,4 +13,11 @@ export const Container = styled.div`
     height: 29px;
     width: 29px;
   }
+  .content {
+    color: #38446d;
+    font-weight: 600;
+    .subcontent {
+      font-weight: 400;
+    }
+  }
 `;
