@@ -31,11 +31,3 @@ export const Color = (orderStatus) => {
       return "#38446D";
   }
 };
-
-export const ExpectedDelivery = (orderStatus, expectedDate) => {
-  if (orderStatus == "failed") {
-    return "-";
-  } else {
-    return expectedDate;
-  }
-};

@@ -27,8 +27,18 @@ function TrackingDetails() {
           />
           <CustomButton type="danger">Track Order</CustomButton>
           <div className="order-info-container">
-            {" "}
-            <OrderInfocontainer />
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>{" "}
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>{" "}
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>
           </div>
         </div>
       </MainContainer>
