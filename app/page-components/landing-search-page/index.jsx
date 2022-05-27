@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
-import { Link } from '@remix-run/react';
+import React, { useState } from "react";
+import { Link } from "@remix-run/react";
+
 import {
   Footer,
   MainContainer,
   LandingSearchPageContainer,
   CustomButton,
-} from './style';
+} from "./style";
 // import { useHistory } from "react-router-dom";
-import { CustomInput, Title } from '~/components/UIElements';
+import { CustomInput, Title } from "~/components/UIElements";
 function LandingSearchPage() {
   // const history = useHistory();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
+  // const handleTrack = () => {
+  //   if (!input) {
+  //     message.info("Please enter Tracking ID");
+  //   } else {
+  //     history.push(`${history.location.pathname}?tracking_id=${input}`);
+  //   }
+  // };
+  const handleEnterKey = (e) => {
+    if (e.keyCode === 13 || e.which === 13) {
+      e.target.blur();
+      handleTrack();
+    }
+  };
 
-  console.log(input);
   return (
     <LandingSearchPageContainer>
       <MainContainer>
@@ -27,12 +40,17 @@ function LandingSearchPage() {
             style={{ marginRight: 10 }}
             placeholder="Enter Tracking ID (Comma separated if multiple)"
             onChange={(e) => {
-              console.log(e.target.value);
               setInput(e.target.value);
             }}
+            enterButton="Track"
+            size="large"
+            onKeyDown={handleEnterKey}
+            value={input}
           />
           <Link to={`/tracking/${input}`}>
-            <CustomButton type="primary">Track Order</CustomButton>
+            <CustomButton type="primary" onClick={handleEnterKey}>
+              Track Order
+            </CustomButton>
           </Link>
         </div>
         <div className="powered">Powered by Pickrr </div>

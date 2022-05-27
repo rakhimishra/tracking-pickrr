@@ -9,6 +9,7 @@ import {
   ViewButton,
   StatusContainer,
   Heading,
+  Stepper,
 } from "./style";
 import { CheckOrderStatus, Color } from "./utils";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
@@ -39,6 +40,8 @@ const icons = {
 
 const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
   const [isViewMore, setIsViewMore] = useState(false);
+  const [showNestedStepper, setShowNestedStepper] = useState(false);
+
   const { Step } = Steps;
   return (
     <div>
@@ -69,10 +72,14 @@ const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
           <div className="support">support@pickrr.com</div>
         </Container>
         <OrderInfoContainer>
-          <OrderItems title="Order Date" content="4 April 2022" />
-          <OrderItems title="Order ID " content="534524TRRDD" />
-          <OrderItems title="Courier" content="Ekart" />
-          <OrderItems title="Payment Mode" content="Prepaid" />
+          <div className="content">
+            <OrderItems title="Order Date" content="4 April 2022" />
+            <OrderItems title="Order ID " content="534524TRRDD" />
+          </div>
+          <div className="content">
+            <OrderItems title="Courier" content="Ekart" />
+            <OrderItems title="Payment Mode" content="Prepaid" />
+          </div>
           <Button
             type="ghost"
             style={{ borderRadius: "10px", color: "#1C439F" }}
@@ -93,7 +100,7 @@ const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
       {isViewMore && (
         <StatusContainer>
           <div className="stepper-container">
-            <Steps progressDot current={1} direction="vertical">
+            <Stepper progressDot current={3} direction="vertical">
               <Step
                 title="Finished"
                 description="This is a description. This is a description."
@@ -108,28 +115,32 @@ const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
               />
               <Step
                 title="Finished"
+                onClick={() => setShowNestedStepper(!showNestedStepper)}
+                className="steps"
                 description={
-                  <Steps progressDot current={1} direction="vertical">
-                    <Step
-                      title="Finished"
-                      description="This is a description. This is a description."
-                    />
-                    <Step
-                      title="Finished"
-                      description="This is a description. This is a description."
-                    />
-                    <Step
-                      title="Finished"
-                      description="This is a description. This is a description."
-                    />
-                    <Step
-                      title="Waiting"
-                      description="This is a description."
-                    ></Step>
-                  </Steps>
+                  showNestedStepper && (
+                    <Steps progressDot current={1} direction="vertical">
+                      <Step
+                        title="Finished"
+                        description="This is a description. This is a description."
+                      />
+                      <Step
+                        title="Finished"
+                        description="This is a description. This is a description."
+                      />
+                      <Step
+                        title="Finished"
+                        description="This is a description. This is a description."
+                      />
+                      <Step
+                        title="Waiting"
+                        description="This is a description."
+                      />
+                    </Steps>
+                  )
                 }
               ></Step>
-            </Steps>
+            </Stepper>
           </div>
           <div className="brand-details-container">
             <div className="brand-name">Brand Name</div>

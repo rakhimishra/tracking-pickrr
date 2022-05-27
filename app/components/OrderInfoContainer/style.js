@@ -52,6 +52,11 @@ export const OrderInfoContainer = styled.div`
   padding: 20px 0px 17px 0px;
   border-bottom: 1px solid #edf0f9;
   margin-bottom: 23px;
+  .content {
+    display: flex;
+    @media screen and (max-width: 768px) {
+    }
+  }
 `;
 export const OrderItem = styled.div`
   font-size: 16px;
@@ -90,6 +95,18 @@ export const StatusContainer = styled.div`
     padding: 25px;
     overflow-x: hidden;
     height: 487px;
+    .steps {
+      cursor: pointer;
+    }
+    .ant-steps-vertical.ant-steps-dot
+      .ant-steps-item
+      > .ant-steps-item-container
+      > .ant-steps-item-tail {
+      top: 13px;
+      left: -9px;
+      margin: 0;
+      padding: 0px;
+    }
   }
   .brand-details-container {
     background: #ffffff;
@@ -134,6 +151,20 @@ export const StatusContainer = styled.div`
         margin: 15px;
       }
     }
+    @media screen and (max-width: 768px) {
+      margin-left: 0px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const Stepper = styled(Steps)`
+  .ant-steps-vertical {
+    position: absolute;
+    margin-left: -24px;
   }
 `;
 

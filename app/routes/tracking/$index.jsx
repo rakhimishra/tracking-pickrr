@@ -5,17 +5,20 @@ import { MainContainer, Container } from "./style";
 import OrderInfocontainer from "~/components/OrderInfoContainer";
 
 export const loader = async ({ request, params }) => {
-  console.log(params);
-  const data = await getTrackingDetails(params);
-
-  if (!data) throw new Error("Tracking not found");
-
-  return data;
+  try {
+    const response = await fetch(
+      `https://cfapi.pickrr.com/plugins/tracking/?tracking_id=${params.index}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
 };
 
 function TrackingDetails() {
-  const { data } = useLoaderData();
-
+  const data = useLoaderData();
+  console.log(data);
   return (
     <Container>
       <Title>Order Tracking Details</Title>
@@ -23,9 +26,24 @@ function TrackingDetails() {
         <div className="input-button-container">
           <CustomInput
             placeholder="Enter Tracking ID (Comma separated if multiple)"
-            style={{ marginRight: 10, width: "769px" }}
+            style={{ marginRight: 10, maxWidth: "769px" }}
           />
           <CustomButton type="danger">Track Order</CustomButton>
+          <div className="order-info-container">
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>
+          </div>
+          <div className="order-info-container">
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>
+          </div>
+          <div className="order-info-container">
+            <div style={{ marginBottom: "30px" }}>
+              <OrderInfocontainer />
+            </div>
+          </div>
           <div className="order-info-container">
             <div style={{ marginBottom: "30px" }}>
               <OrderInfocontainer />

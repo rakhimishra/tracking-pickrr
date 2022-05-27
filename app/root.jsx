@@ -1,4 +1,4 @@
-import { Outlet, LiveReload, Links, Meta } from 'remix';
+import { Outlet, LiveReload, Links, Meta } from "remix";
 import {
   // Links,
   // LiveReload,
@@ -6,20 +6,20 @@ import {
   // Outlet,
   Scripts,
   useLoaderData,
-} from '@remix-run/react';
-import { useContext } from 'react';
-import globalStylesUrl from '~/styles/global.css';
-import antdStyles from 'antd/dist/antd.css';
-import PickrrHeader from './page-components/pickrr-header';
-import StylesContext from './styles-context';
+} from "@remix-run/react";
+import { useContext } from "react";
+import globalStylesUrl from "~/styles/global.css";
+import antdStyles from "antd/dist/antd.css";
+import PickrrHeader from "./page-components/pickrr-header";
+import StylesContext from "./styles-context";
 export const links = () => [
-  { rel: 'stylesheet', href: antdStyles },
-  { rel: 'stylesheet', href: globalStylesUrl },
+  { rel: "stylesheet", href: antdStyles },
+  { rel: "stylesheet", href: globalStylesUrl },
 ];
 
 export const meta = () => {
-  const description = 'Pickrr Tracking page';
-  const keywords = 'remix, react, javascript';
+  const description = "Pickrr Tracking page";
+  const keywords = "remix, react, javascript";
 
   return {
     description,
@@ -45,16 +45,17 @@ function Document({ children, title }) {
       <head>
         <meta charSet="utf-8" />
         {/* <link rel="icon" href="/favicon.png" type="image/png" /> */}
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
         {title ? <title>{title}</title> : null}
         <Meta />
-        {typeof document === 'undefined' ? '__STYLES__' : null}
+        {typeof document === "undefined" ? "__STYLES__" : null}
         {styles}
         <Links />
       </head>
       <body>
         <div className="container"> {children}</div>
         <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
   );
@@ -66,7 +67,7 @@ function Layout({ children }) {
   return (
     <>
       <div className="container">
-        {' '}
+        {" "}
         <PickrrHeader />
         {children}
       </div>
