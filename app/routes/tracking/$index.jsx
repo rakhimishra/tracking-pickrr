@@ -1,38 +1,32 @@
-import { Link, redirect, useLoaderData } from "remix";
-import { getTrackingDetails } from "~/utils/server.query";
-import { Title, CustomInput, CustomButton } from "~/components/UIElements";
-import { MainContainer, Container } from "./style";
-import OrderInfocontainer from "~/components/OrderInfoContainer";
+import { Link, redirect, useLoaderData } from 'remix';
+import { getTrackingDetails } from '~/utils/server.query';
+// import { db } from '~/utils/db.server';
+// import { getUser } from '~/utils/session.server';
 
 export const loader = async ({ request, params }) => {
-  console.log(params);
-  const data = await getTrackingDetails(params);
+  console.log(params, 'params');
+  try {
+    const response = await fetch(
+      `https://cfapi.pickrr.com/plugins/tracking/?tracking_id=${params.index}`
+    );
+    const data = await response.json();
 
-  if (!data) throw new Error("Tracking not found");
-
-  return data;
+    // console.log('data ==>', data);
+    // return json(await data.json());
+    return data;
+  } catch (error) {
+    console.log('error', error);
+    return [];
+  }
 };
 
 function TrackingDetails() {
-  const { data } = useLoaderData();
-
+  const data = useLoaderData();
   return (
-    <Container>
-      <Title>Order Tracking Details</Title>
-      <MainContainer>
-        <div className="input-button-container">
-          <CustomInput
-            placeholder="Enter Tracking ID (Comma separated if multiple)"
-            style={{ marginRight: 10, width: "769px" }}
-          />
-          <CustomButton type="danger">Track Order</CustomButton>
-          <div className="order-info-container">
-            {" "}
-            <OrderInfocontainer />
-          </div>
-        </div>
-      </MainContainer>
-    </Container>
+    <div>
+      <div>Tracking Details</div>
+      <div>{data.product_name}</div>
+    </div>
   );
 }
 
