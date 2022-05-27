@@ -1,27 +1,21 @@
 import { Link, redirect, useLoaderData } from "remix";
 import { getTrackingDetails } from "~/utils/server.query";
-// import { db } from '~/utils/db.server';
-// import { getUser } from '~/utils/session.server';
+import { Title, CustomInput, CustomButton } from "~/components/UIElements";
+import { MainContainer, Container } from "./style";
+import OrderInfocontainer from "~/components/OrderInfoContainer";
 
 export const loader = async ({ request, params }) => {
-  console.log(params, "params");
-  try {
-    const response = await fetch(
-      `https://cfapi.pickrr.com/plugins/tracking/?tracking_id=${params.index}`
-    );
-    const data = await response.json();
+  console.log(params);
+  const data = await getTrackingDetails(params);
 
-    // console.log('data ==>', data);
-    // return json(await data.json());
-    return data;
-  } catch (error) {
-    console.log("error", error);
-    return [];
-  }
+  if (!data) throw new Error("Tracking not found");
+
+  return data;
 };
 
 function TrackingDetails() {
-  const data = useLoaderData();
+  const { data } = useLoaderData();
+
   return (
     <Container>
       <Title>Order Tracking Details</Title>
@@ -33,15 +27,6 @@ function TrackingDetails() {
           />
           <CustomButton type="danger">Track Order</CustomButton>
           <div className="order-info-container">
-            <div style={{ marginBottom: "30px" }}>
-              <OrderInfocontainer />
-            </div>
-            <div style={{ marginBottom: "30px" }}>
-              <OrderInfocontainer />
-            </div>{" "}
-            <div style={{ marginBottom: "30px" }}>
-              <OrderInfocontainer />
-            </div>{" "}
             <div style={{ marginBottom: "30px" }}>
               <OrderInfocontainer />
             </div>
