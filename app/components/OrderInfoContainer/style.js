@@ -11,13 +11,32 @@ export const Container = styled.div`
   border-bottom: 1px solid #edf0f9;
   padding-bottom: 20px;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   font-weight: 600;
   font-style: normal;
   color: #38446d;
+  .supportContainer {
+    display: flex;
+    flex: 0.6;
+    justify-content: space-between;
+    .expected {
+      font-size: 16px;
+    }
+    .delivery-info {
+      color: #158a2a;
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
   .order-placed {
     display: flex;
+    flex: 0.4;
+    .icon {
+      height: 29px;
+      width: 29px;
+    }
   }
   .content {
     margin-left: 13px;
@@ -27,18 +46,38 @@ export const Container = styled.div`
       font-size: 14px;
     }
   }
-  .expected {
-    font-size: 16px;
-  }
-  .delivery-info {
-    color: #158a2a;
-    font-weight: 700;
-    font-size: 14px;
-  }
+
   .support {
     font-size: 14px;
     color: #1c439f;
     font-weight: 400;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .supportContainer {
+      width: 100%;
+      margin-top: 30px;
+      .expected {
+        font-size: 12px;
+      }
+    }
+    .content {
+      margin-left: 13px;
+      font-size: 14px;
+      .subcontent {
+        font-weight: 400;
+        font-size: 12px;
+      }
+    }
+    .icon {
+      height: 24px;
+      width: 24px;
+    }
+    .support {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -48,13 +87,22 @@ export const Icon = styled(CheckCircleFilled)`
 
 export const OrderInfoContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: 20px 0px 17px 0px;
   border-bottom: 1px solid #edf0f9;
   margin-bottom: 23px;
-  .content {
+  .order-content {
     display: flex;
-    @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0px 0px 17px 0px;
+    .order-content {
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 20px;
     }
   }
 `;
@@ -62,12 +110,18 @@ export const OrderItem = styled.div`
   font-size: 16px;
   color: #38446d;
   border-right: 1px solid #c6c8e3;
-  padding-right: 30px;
+  padding: 0px 40px;
+
   .title {
     font-weight: 400;
   }
   .content {
     font-weight: 600;
+  }
+  @media screen and (max-width: 768px) {
+    border: none;
+    padding: 0px;
+    font-size: 14px;
   }
 `;
 

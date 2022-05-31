@@ -38,9 +38,24 @@ const icons = {
     "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
 };
 
-const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
+const OrderInfocontainer = ({
+  status,
+  expectedDelivery,
+  isMultiOrder,
+  courier,
+  orderDate,
+  orderId,
+  lastUpdate,
+  itemList,
+  trackArr,
+}) => {
   const [isViewMore, setIsViewMore] = useState(false);
   const [showNestedStepper, setShowNestedStepper] = useState(false);
+  const totalInvoice = itemList
+    .map((item) => item.price)
+    .reduce((a, b) => a + b);
+
+  console.log(totalInvoice);
 
   const { Step } = Steps;
   return (
@@ -48,56 +63,53 @@ const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
       <MainContainer>
         <Container>
           <div className="order-placed">
-            <img src={icons[status]} height={29} width={29} />
+            <img src={icons[status]} className="icon" />
             <div className="content">
               <div style={{ color: Color(status) }}>
                 {CheckOrderStatus(status)}
               </div>
 
-              <div className="subcontent">
-                Last updated on April 2nd 2022, 9:10 pm
-              </div>
+              <div className="subcontent">Last updated on {lastUpdate}</div>
             </div>
           </div>
-          {status !== "delivered" && (
-            <div>
-              <div className="expected">Expected Delivery </div>
-              <div className="delivery-info">
-                {status !== "failed" || status !== "cancelled"
-                  ? "-"
-                  : `Arriving on ${expectedDelivery}`}
+          <div className="supportContainer">
+            {status !== "delivered" && (
+              <div className="expectedContainer">
+                <div className="expected">Expected Delivery </div>
+                <div className="delivery-info">
+                  {/* {status !== "failed" || status !== "cancelled"
+                    ? "-"
+                    : `Arriving on ${expectedDelivery}`} */}
+                  {expectedDelivery}
+                </div>
               </div>
-            </div>
-          )}
-          <div className="support">support@pickrr.com</div>
+            )}
+            <div className="support">support@pickrr.com</div>
+          </div>
         </Container>
         <OrderInfoContainer>
-          <div className="content">
-            <OrderItems title="Order Date" content="4 April 2022" />
-            <OrderItems title="Order ID " content="534524TRRDD" />
+          <div className="order-content">
+            <OrderItems title="Order Date" content={orderDate} />
+            <OrderItems title="Order ID " content={orderId} />
           </div>
-          <div className="content">
-            <OrderItems title="Courier" content="Ekart" />
+          <div className="order-content">
+            <OrderItems title="Courier" content={courier} />
             <OrderItems title="Payment Mode" content="Prepaid" />
           </div>
-          <Button
-            type="ghost"
-            style={{ borderRadius: "10px", color: "#1C439F" }}
-          >
-            Request for Reattempt
-          </Button>
         </OrderInfoContainer>
-      </MainContainer>{" "}
-      <div
-        style={{ textAlign: "center", marginTop: "-15px" }}
-        onClick={() => setIsViewMore(!isViewMore)}
-      >
-        <ViewButton type="primary" size="large">
-          {isViewMore ? "Hide" : "View"} Details{" "}
-          {isViewMore ? <UpOutlined /> : <DownOutlined />}
-        </ViewButton>
-      </div>
-      {isViewMore && (
+      </MainContainer>
+      {isMultiOrder && (
+        <div
+          style={{ textAlign: "center", marginTop: "-15px" }}
+          onClick={() => setIsViewMore(!isViewMore)}
+        >
+          <ViewButton type="primary" size="large">
+            {isViewMore ? "Hide" : "View"} Details{" "}
+            {isViewMore ? <UpOutlined /> : <DownOutlined />}
+          </ViewButton>
+        </div>
+      )}
+      {(isViewMore || (!isMultiOrder && !isViewMore)) && (
         <StatusContainer>
           <div className="stepper-container">
             <Stepper progressDot current={3} direction="vertical">
@@ -151,43 +163,23 @@ const OrderInfocontainer = ({ status = "placed", expectedDelivery }) => {
             <div>
               <Heading>Product Details :</Heading>
               <div className="product-name">
-                <div className="product-item">
-                  <div>1</div>
-                  <div>
-                    <div>Men’s summer t- shirt</div>
-                    <div>Qty : 01</div>
-                  </div>
-                  <div className="prepaid">₹243.00</div>
-                </div>
-                <div className="product-item">
-                  <div>1</div>
-                  <div>
-                    <div>Men’s summer t- shirt</div>
-                    <div>Qty : 01</div>
-                  </div>
-                  <div className="prepaid">₹243.00</div>
-                </div>{" "}
-                <div className="product-item">
-                  <div>1</div>
-                  <div>
-                    <div>Men’s summer t- shirt</div>
-                    <div>Qty : 01</div>
-                  </div>
-                  <div className="prepaid">₹243.00</div>
-                </div>
-                <div className="product-item">
-                  <div>1</div>
-                  <div>
-                    <div>Men’s summer t- shirt</div>
-                    <div>Qty : 01</div>
-                  </div>
-                  <div className="prepaid">₹243.00</div>
-                </div>
+                {itemList.map((item, index) => {
+                  return (
+                    <div className="product-item">
+                      <div>1</div>
+                      <div>
+                        <div>{item.item_name}</div>
+                        <div>Qty : {item.quantity}</div>
+                      </div>
+                      <div className="prepaid">₹{item.price}</div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="mode-of-payment">
               <div>Total</div>
-              <div className="prepaid">₹243.00</div>
+              <div className="prepaid">₹{totalInvoice}</div>
             </div>
           </div>
         </StatusContainer>

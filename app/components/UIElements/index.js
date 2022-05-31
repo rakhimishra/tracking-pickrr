@@ -218,9 +218,6 @@ export const CustomTextArea = styled(TextArea)`
   border-radius: 8px;
 `;
 export const CustomInput = styled(Input)`
-  width: ${(props) => {
-    return props.width;
-  }};
   height: 49px !important;
   background: #ffffff !important;
   border: 1px solid #ccd3de !important;
