@@ -13,6 +13,7 @@ import {
 } from "./style";
 import { CheckOrderStatus, Color } from "./utils";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import moment from "moment";
 
 const OrderItems = ({ title, content }) => {
   return (
@@ -55,7 +56,7 @@ const OrderInfocontainer = ({
     .map((item) => item.price)
     .reduce((a, b) => a + b);
 
-  console.log(totalInvoice);
+  console.log(moment(expectedDelivery).format("MMMM Do YYYY, h:mm a"));
 
   const { Step } = Steps;
   return (
@@ -69,7 +70,10 @@ const OrderInfocontainer = ({
                 {CheckOrderStatus(status)}
               </div>
 
-              <div className="subcontent">Last updated on {lastUpdate}</div>
+              <div className="subcontent">
+                Last updated on{" "}
+                {moment(lastUpdate).format("MMMM Do YYYY, h:mm a")}
+              </div>
             </div>
           </div>
           <div className="supportContainer">
@@ -80,7 +84,7 @@ const OrderInfocontainer = ({
                   {/* {status !== "failed" || status !== "cancelled"
                     ? "-"
                     : `Arriving on ${expectedDelivery}`} */}
-                  {expectedDelivery}
+                  {moment(expectedDelivery).format("MMMM Do YYYY")}
                 </div>
               </div>
             )}
@@ -89,7 +93,10 @@ const OrderInfocontainer = ({
         </Container>
         <OrderInfoContainer>
           <div className="order-content">
-            <OrderItems title="Order Date" content={orderDate} />
+            <OrderItems
+              title="Order Date"
+              content={moment(orderDate).format("MMMM Do YYYY")}
+            />
             <OrderItems title="Order ID " content={orderId} />
           </div>
           <div className="order-content">
@@ -113,18 +120,16 @@ const OrderInfocontainer = ({
         <StatusContainer>
           <div className="stepper-container">
             <Stepper progressDot current={3} direction="vertical">
-              <Step
-                title="Finished"
-                description="This is a description. This is a description."
-              />
-              <Step
-                title="Finished"
-                description="This is a description. This is a description."
-              />
-              <Step
-                title="Finished"
-                description="This is a description. This is a description."
-              />
+              {trackArr.map((track, index) => {
+                return (
+                  <Step
+                    title={track.status_array[0].status_body}
+                    description="Last updated on -April 1st 2022 - 12:00 pm"
+                    {...track.status_array[0].status_time}
+                  ></Step>
+                );
+              })}
+
               <Step
                 title="Finished"
                 onClick={() => setShowNestedStepper(!showNestedStepper)}
