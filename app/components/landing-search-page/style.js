@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Button } from "antd";
 export const Footer = styled.img`
-  width: 100%;
+  width: 100% !important;
   bottom: 0;
 `;
 
@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
   max-width: 1050px;
   width: 100%;
   margin: 0 auto;
-  padding: 70px;
+  padding: 75px 70px;
   .title {
     font-style: normal;
     font-weight: 700;

@@ -85,27 +85,27 @@ export const Icon = styled(CheckCircleFilled)`
   font-size: 29px;
 `;
 
-export const OrderInfoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 20px 0px 17px 0px;
-  border-bottom: 1px solid #edf0f9;
-  margin-bottom: 23px;
-  .order-content {
-    display: flex;
-  }
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    padding: 0px 0px 17px 0px;
-    .order-content {
-      width: 100%;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-  }
-`;
+// export const OrderInfoContainer = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   flex-wrap: wrap;
+//   padding: 20px 0px 17px 0px;
+//   border-bottom: 1px solid #edf0f9;
+//   margin-bottom: 23px;
+//   .order-content {
+//     display: flex;
+//   }
+//   @media screen and (max-width: 768px) {
+//     flex-direction: column;
+//     flex-wrap: nowrap;
+//     padding: 0px 0px 17px 0px;
+//     .order-content {
+//       width: 100%;
+//       justify-content: space-between;
+//       margin-top: 20px;
+//     }
+//   }
+// `;
 export const OrderItem = styled.div`
   font-size: 16px;
   color: #38446d;
@@ -207,6 +207,7 @@ export const StatusContainer = styled.div`
     }
     @media screen and (max-width: 768px) {
       margin-left: 0px;
+      margin-top: 20px;
     }
   }
   @media screen and (max-width: 768px) {

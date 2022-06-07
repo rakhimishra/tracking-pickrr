@@ -1,31 +1,35 @@
-export const CheckOrderStatus = (orderStatus) => {
-  switch (orderStatus) {
-    case "placed":
-      return "Your Order has been placed";
-    case "failed":
-      return "Failed Attempt at Delivery";
-    case "delivered":
-      return "Your Order has been delivered";
-    case "cancelled":
+export const CheckOrderStatus = (type) => {
+  switch (type) {
+    case "OP":
+      return "Order Received";
+    case "OC":
       return "Order Cancelled";
-    case "inTransit":
-      return "Order In- Transit";
-    case "returned":
+    case "PP" || "SHP":
+      return "Order Dispatched";
+    case "OT":
+      return "Order in Transit";
+    case "NDR":
+      return "Failed Attempt at Delivery";
+    case "OO":
+      return "Order Out for Delivery";
+    case "DL":
+      return "Order Delivered";
+    case "RTO" || "RTD":
       return "Order Returned";
     default:
-      return "Your order has been initiated";
+      return "Order Initiated";
   }
 };
 
 export const Color = (orderStatus) => {
   switch (orderStatus) {
-    case "placed" || "inTransit":
+    case "OP" || "OT":
       return "#38446D";
-    case "failed" || "returned":
+    case "NDR" || "RTO" || "RTD":
       return "#EF7E00";
-    case "delivered":
+    case "DL":
       return "#3B9A00";
-    case "cancelled":
+    case "OC":
       return "#FA5357";
     default:
       return "#38446D";

@@ -102,6 +102,7 @@ export const CommonText = styled.p`
 `;
 export const SmallerText = styled.p`
   font-weight: 400;
+  color: #38446d;
   font-size: ${(props) => {
     switch (props.size) {
       case 1:
@@ -114,7 +115,7 @@ export const SmallerText = styled.p`
     }
   }};
   line-height: 140%;
-  color: ${(props) => (props.color === "white" ? "#ffff" : "black")};
+  /* color: ${(props) => (props.color === "white" ? "#ffff" : "black")}; */
 `;
 export const CommonSubText = styled.p`
   font-size: 12px;
@@ -225,8 +226,8 @@ export const CustomInput = styled(Input)`
 `;
 
 export const Title = styled.p`
-  font-style: normal;
-  font-size: 30px;
+  font-weight: 700;
+  font-size: 32px;
   line-height: 37px;
   color: #38446d;
   ${media.mobile`

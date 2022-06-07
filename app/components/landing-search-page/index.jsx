@@ -10,15 +10,8 @@ import {
 // import { useHistory } from "react-router-dom";
 import { CustomInput, Title } from "~/components/UIElements";
 function LandingSearchPage() {
-  // const history = useHistory();
   const [input, setInput] = useState("");
-  // const handleTrack = () => {
-  //   if (!input) {
-  //     message.info("Please enter Tracking ID");
-  //   } else {
-  //     history.push(`${history.location.pathname}?tracking_id=${input}`);
-  //   }
-  // };
+
   const handleEnterKey = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       e.target.blur();
@@ -46,16 +39,18 @@ function LandingSearchPage() {
             size="large"
             onKeyDown={handleEnterKey}
             value={input}
+            allowClear
           />
           <Link to={`/tracking/${input}`}>
-            <CustomButton type="primary" onClick={handleEnterKey}>
-              Track Order
-            </CustomButton>
+            <CustomButton type="primary">Track Order</CustomButton>
           </Link>
         </div>
         <div className="powered">Powered by Pickrr </div>
       </MainContainer>
-      <Footer src="https://d10srchmli830n.cloudfront.net/1652867194453_e3b1cfc2-46b6-4959-b1e5-c2d02f51c30a_Group-27611.svg" />
+      {/* <Footer
+        src="https://d10srchmli830n.cloudfront.net/1652867194453_e3b1cfc2-46b6-4959-b1e5-c2d02f51c30a_Group-27611.svg"
+        alt="footer"
+      /> */}
     </LandingSearchPageContainer>
   );
 }

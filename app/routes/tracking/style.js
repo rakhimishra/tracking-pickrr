@@ -3,6 +3,10 @@ export const Container = styled.div`
   max-width: 1050px;
   width: 100%;
   margin: 0 auto;
+  .search-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -18,9 +22,7 @@ export const MainContainer = styled.div`
   .order-info-container {
     margin-top: 30px;
   }
-  .search-container {
-    display: flex;
-  }
+
   @media screen and (max-width: 768px) {
     padding: 30px 15px;
     .search-container {
