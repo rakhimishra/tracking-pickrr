@@ -18,6 +18,14 @@ function LandingSearchPage() {
       handleTrack();
     }
   };
+  const handleBtnClick = () => {
+    if (!trackingId) {
+      notification.error({ message: "Please enter Tracking ID" });
+      return;
+    } else {
+      navigate(`/tracking/#/${trackingId}`, { replace: true });
+    }
+  };
 
   return (
     <LandingSearchPageContainer>
@@ -41,16 +49,12 @@ function LandingSearchPage() {
             value={input}
             allowClear
           />
-          <Link to={`/tracking/${input}`}>
+          <Link to={`/tracking/#/${input}`}>
             <CustomButton type="primary">Track Order</CustomButton>
           </Link>
         </div>
         <div className="powered">Powered by Pickrr </div>
       </MainContainer>
-      {/* <Footer
-        src="https://d10srchmli830n.cloudfront.net/1652867194453_e3b1cfc2-46b6-4959-b1e5-c2d02f51c30a_Group-27611.svg"
-        alt="footer"
-      /> */}
     </LandingSearchPageContainer>
   );
 }

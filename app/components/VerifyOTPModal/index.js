@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "antd";
-
 import { ModalX, VerifyButton, ResendButton } from "./style";
 import {
   Title,
@@ -66,10 +65,10 @@ const VerifyOTPModal = ({
           </Col>
           <Col span={18} offset={3}>
             <SpaceBetweenContainer>
+              <ResendButton onClick={sendOTP}>Resend OTP</ResendButton>
               <VerifyButton onClick={handleVerify} loading={modalLoading}>
                 Verify OTP
               </VerifyButton>
-              <ResendButton onClick={sendOTP}>Resend OTP</ResendButton>
             </SpaceBetweenContainer>
           </Col>
         </Row>

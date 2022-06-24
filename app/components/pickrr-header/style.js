@@ -2,7 +2,10 @@ import styled from "styled-components";
 export const HeaderContainer = styled.div`
   max-width: 1050px;
   width: 100% !important;
-
+  position: sticky;
+  top: 0;
+  z-index: 10000000;
+  background-color: #ffffff;
   margin: auto;
   padding: 25px 0px;
   display: flex;

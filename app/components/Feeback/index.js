@@ -1,35 +1,38 @@
 import React, { useState } from "react";
-import { FeedbackContainer, Container } from "./style";
-import { Rate, Form, Button, message } from "antd";
+import {
+  FeedbackContainer,
+  Container,
+  SubmitButton,
+  IconContainer,
+} from "./style";
+import { Rate, Form, message } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
-import { FlexBox, FlexContainer } from "../UIElements";
+import { FlexContainer } from "../UIElements";
 import VerifyOTPModal from "../VerifyOTPModal";
 import {
   FaRegSmile,
-  FaRegSmileBeam,
   FaRegGrinAlt,
   FaRegFrown,
+  FaSmile,
+  FaFrown,
+  FaGrinAlt,
 } from "react-icons/fa";
-const customIcons = {
-  1: <FaRegGrinAlt />,
-  2: <FaRegSmile />,
-  3: <FaRegFrown />,
-};
 
 const Feedback = ({ data }) => {
   const { courier_parent_name } = data;
   const [customerFeedback, setCustomerFeedback] = useState(null);
-  const [deliveryRating, setDeliveryRating] = useState(1);
+  const [deliveryRating, setDeliveryRating] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [companySubmitLoading, setCompanySubmitLoading] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(null);
+  const [type, setType] = useState(null);
   const [form] = Form.useForm();
+
   const handleCompanySubmit = async () => {
-    if (!rating || !companyFeedback) {
-      return message.warning("Please fill both the fields");
+    if (!rating && !deliveryRating && !customerFeedback) {
+      return message.warning("Please fill any of the fields");
     }
     setCompanySubmitLoading(true);
     await sendOTP("company");
@@ -48,8 +51,8 @@ const Feedback = ({ data }) => {
       otp,
       feedback_dict: {
         customer_rating: rating,
-        feedback: customerFeedback,
-        courier_feedback: deliveryRating,
+        customerFeedback: customerFeedback,
+        deliveryRating: deliveryRating,
       },
     };
     setModalLoading(true);
@@ -63,6 +66,7 @@ const Feedback = ({ data }) => {
         body: JSON.stringify(postData),
       }
     );
+
     const json = await response.json();
     if (!json.err) {
       message.success("Feedback submitted successfully!");
@@ -91,14 +95,17 @@ const Feedback = ({ data }) => {
       }
     );
     const json = await response.json();
+    // setIsModalVisible(true);
     if (!json.err) {
       message.success("OTP sent successfully!");
       setPhoneNumber(json.last_digits_number);
+      setType(type);
       setIsModalVisible(true);
     } else {
       message.error(json.err);
     }
   };
+
   return (
     <>
       <Container>
@@ -112,8 +119,8 @@ const Feedback = ({ data }) => {
             // defaultValue={rating}
             style={{ color: "#717BAD", fontSize: "32px" }}
             onChange={(value) => {
-              setRating(value);
               console.log(value);
+              setRating(value);
             }}
           />
           <Form
@@ -142,33 +149,56 @@ const Feedback = ({ data }) => {
 
             <FlexContainer style={{ justifyContent: "flex-start" }}>
               <div className="heading">Rate your Delivery Experience :</div>
-              <Rate
-                // defaultValue={3}
-                defaultValue={deliveryRating}
-                character={({ index }) => customIcons[index + 1]}
-                onChange={(value) => {
-                  console.log(value);
-                  setDeliveryRating(value);
-                }}
-                style={{
-                  fontSize: "34px",
-                  marginLeft: "20px",
-                  color: "#002659",
-                }}
-              />
+              <IconContainer>
+                {deliveryRating == "good" ? (
+                  <FaGrinAlt className="icon" />
+                ) : (
+                  <FaRegGrinAlt
+                    className="icon"
+                    values={deliveryRating}
+                    onClick={() => {
+                      setDeliveryRating("good");
+                    }}
+                  />
+                )}
+                Good
+              </IconContainer>
+
+              <IconContainer>
+                {deliveryRating == "okay" ? (
+                  <FaSmile className="icon" />
+                ) : (
+                  <FaRegSmile
+                    className="icon"
+                    onClick={() => setDeliveryRating("okay")}
+                  />
+                )}
+                Okay
+              </IconContainer>
+
+              <IconContainer>
+                {deliveryRating === "bad" ? (
+                  <FaFrown className="icon" />
+                ) : (
+                  <FaRegFrown
+                    className="icon"
+                    onClick={() => setDeliveryRating("bad")}
+                  />
+                )}
+                Bad
+              </IconContainer>
             </FlexContainer>
           </Form>
         </FeedbackContainer>
         <div style={{ textAlign: "center", padding: "28px 0px" }}>
-          {" "}
-          <Button
+          <SubmitButton
             className="button"
             onClick={handleCompanySubmit}
             type={"primary"}
             loading={companySubmitLoading}
           >
             Submit Feedback
-          </Button>
+          </SubmitButton>
         </div>
       </Container>
       <VerifyOTPModal

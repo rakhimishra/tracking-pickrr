@@ -85,27 +85,6 @@ export const Icon = styled(CheckCircleFilled)`
   font-size: 29px;
 `;
 
-// export const OrderInfoContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   flex-wrap: wrap;
-//   padding: 20px 0px 17px 0px;
-//   border-bottom: 1px solid #edf0f9;
-//   margin-bottom: 23px;
-//   .order-content {
-//     display: flex;
-//   }
-//   @media screen and (max-width: 768px) {
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//     padding: 0px 0px 17px 0px;
-//     .order-content {
-//       width: 100%;
-//       justify-content: space-between;
-//       margin-top: 20px;
-//     }
-//   }
-// `;
 export const OrderItem = styled.div`
   font-size: 16px;
   color: #38446d;
@@ -172,7 +151,6 @@ export const StatusContainer = styled.div`
       padding: 33px 25px 22px;
       border-bottom: 1px solid #c5cde3;
       font-weight: 700;
-
       color: #000b34;
     }
     .mode-of-payment {
@@ -203,6 +181,7 @@ export const StatusContainer = styled.div`
         justify-content: space-between;
         margin-top: 17px;
         margin: 15px;
+        align-items: center;
       }
     }
     @media screen and (max-width: 768px) {
@@ -239,4 +218,10 @@ export const InnerSteps = styled(Steps)`
     position: absolute;
     z-index: 10000;
   }
+`;
+
+export const ViewMore = styled.div`
+  cursor: pointer;
+  font-size: small;
+  font-weight: bolder;
 `;

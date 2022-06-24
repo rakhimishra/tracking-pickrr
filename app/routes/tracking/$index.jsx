@@ -1,11 +1,10 @@
-import { Link, redirect, useLoaderData } from "remix";
+import { useLoaderData } from "remix";
 import { Title, CustomInput, CustomButton } from "~/components/UIElements";
 import { MainContainer, Container } from "./style";
 import OrderInfocontainer from "~/components/OrderInfoContainer";
 import { useState, useEffect } from "react";
-import Feedback from "~/components/Feeback";
 import { getTrackingDetails } from "~/utils/server.query";
-import { Col, notification, Row } from "antd";
+import { notification } from "antd";
 
 export const loader = async ({ params }) => {
   const trackingId = params.index;
@@ -36,7 +35,9 @@ function TrackingDetails() {
       return;
     } else {
       setIsLoading(true);
+      window.location.href = `/tracking/${trackingId}`;
       const data = await getTrackingDetails(trackingId);
+
       setData({ ...data });
       setIsLoading(false);
     }
@@ -71,7 +72,7 @@ function TrackingDetails() {
         </div>
 
         {isError.errorStatus && (
-          <div style={{ color: "#FF0006", marginTop: "8px" }}>
+          <div style={{ color: "#FF0006", marginTop: "8px", height: "250px" }}>
             {isError.message}
           </div>
         )}

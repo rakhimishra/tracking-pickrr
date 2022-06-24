@@ -1,4 +1,6 @@
+import { Button } from "antd";
 import styled from "styled-components";
+import { FlexColContainer } from "../UIElements";
 
 export const FeedbackContainer = styled.div`
   padding: 20px 34px;
@@ -23,5 +25,19 @@ export const Container = styled.div`
     color: #38446d;
     background: #ffffff;
     border-radius: 10px;
+  }
+`;
+
+export const SubmitButton = styled(Button)`
+  background-color: #ffffff;
+`;
+
+export const IconContainer = styled(FlexColContainer)`
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  .icon {
+    font-size: 34px;
+    color: #002659;
   }
 `;

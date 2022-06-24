@@ -10,11 +10,14 @@ import {
   StatusContainer,
   Heading,
   Stepper,
+  ViewMore,
 } from "./style";
 import { CheckOrderStatus, Color } from "./utils";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import moment from "moment";
 import Feedback from "../Feeback";
+import { FlexContainer } from "../UIElements";
+import TimelineComp from "../TimelineComp";
 
 const OrderItems = ({ title, content, css }) => {
   return (
@@ -48,11 +51,11 @@ const OrderInfocontainer = ({
   data,
 }) => {
   const [isViewMore, setIsViewMore] = useState(false);
-  const [showNestedStepper, setShowNestedStepper] = useState(false);
-  const totalInvoice = itemList
-    .map((item) => item.price)
-    .reduce((a, b) => a + b);
-  const { Step } = Steps;
+  const [showMoreItems, setShowMoreItems] = useState(false);
+
+  const handleshowMoreItems = () => {
+    setShowMoreItems(!showMoreItems);
+  };
 
   return (
     <div>
@@ -137,55 +140,9 @@ const OrderInfocontainer = ({
       {(isViewMore || (!isMultiOrder && !isViewMore)) && (
         <StatusContainer>
           <div className="stepper-container">
-            <Stepper
-              progressDot
-              current={trackArr?.length}
-              direction="vertical"
-              status="error"
-            >
-              {trackArr.map((track, index) => {
-                return (
-                  <Step
-                    key={index}
-                    onClick={() => setShowNestedStepper(!showNestedStepper)}
-                    title={track.status_array[0].pickrr_status}
-                    className="steps"
-                    description={
-                      showNestedStepper && track.status_array.length > 1 ? (
-                        <Steps
-                          progressDot
-                          current={track.status_array.length}
-                          direction="vertical"
-                        >
-                          {track.status_array.map((tracking, index) => {
-                            return (
-                              <Step
-                                key={index}
-                                title={tracking.pickrr_status}
-                                description={tracking.status_time}
-                              />
-                            );
-                          })}
-                        </Steps>
-                      ) : (
-                        <>
-                          <div>
-                            Last updated on
-                            {moment(track.status_array[0].status_time).format(
-                              "MMMM Do YYYY"
-                            )}
-                          </div>
-                          {track.status_array[0].status_location && (
-                            <div>{track.status_array[0].status_location}</div>
-                          )}
-                        </>
-                      )
-                    }
-                  />
-                );
-              })}
-            </Stepper>
+            <TimelineComp trackArr={trackArr && trackArr} />
           </div>
+
           <div className="brand-details-container">
             <div className="brand-name">Brand Name</div>
             <div className="mode-of-payment">
@@ -195,23 +152,48 @@ const OrderInfocontainer = ({
             <div>
               <Heading>Product Details :</Heading>
               <div className="product-name">
-                {itemList.map((item, index) => {
-                  return (
-                    <div className="product-item">
-                      <div style={{ marginRight: 10 }}>1</div>
-                      <div>
-                        <div>{item.item_name}</div>
-                        <div>Qty : {item.quantity}</div>
-                      </div>
-                      <div className="prepaid">₹{item.price}</div>
-                    </div>
-                  );
-                })}
+                {itemList &&
+                  itemList?.map((item, index) => {
+                    if (index < 2) {
+                      return (
+                        <div className="product-item" key={index}>
+                          <FlexContainer>
+                            <div style={{ marginRight: 10 }}>{index + 1}</div>
+                            <div>
+                              <div>{item?.item_name}</div>
+                              <div>Qty : {item?.quantity}</div>
+                            </div>
+                          </FlexContainer>
+                          <div className="prepaid">₹{item?.price}</div>
+                        </div>
+                      );
+                    } else {
+                      if (showMoreItems) {
+                        return (
+                          <div className="product-item" key={index}>
+                            <FlexContainer>
+                              <div style={{ marginRight: 10 }}>{index + 1}</div>
+                              <div>
+                                <div>{item?.item_name}</div>
+                                <div>Qty : {item?.quantity}</div>
+                              </div>
+                            </FlexContainer>
+                            <div className="prepaid">₹{item?.price}</div>
+                          </div>
+                        );
+                      }
+                    }
+                  })}
+                {itemList.length > 2 && !showMoreItems && (
+                  <ViewMore onClick={handleshowMoreItems}>
+                    +{itemList.length - 2} more
+                  </ViewMore>
+                )}
               </div>
             </div>
             <div className="mode-of-payment">
               <div>Total</div>
-              <div className="prepaid">₹{totalInvoice}</div>
+              <div className="prepaid">₹{data?.info?.invoice_value}</div>
             </div>
           </div>
         </StatusContainer>
