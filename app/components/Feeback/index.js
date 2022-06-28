@@ -4,6 +4,7 @@ import {
   Container,
   SubmitButton,
   IconContainer,
+  RateContainer,
 } from "./style";
 import { Rate, Form, message } from "antd";
 import TextArea from "antd/lib/input/TextArea";
@@ -147,47 +148,49 @@ const Feedback = ({ data }) => {
               />
             </Form.Item>
 
-            <FlexContainer style={{ justifyContent: "flex-start" }}>
-              <div className="heading">Rate your Delivery Experience :</div>
-              <IconContainer>
-                {deliveryRating == "good" ? (
-                  <FaGrinAlt className="icon" />
-                ) : (
-                  <FaRegGrinAlt
-                    className="icon"
-                    values={deliveryRating}
-                    onClick={() => {
-                      setDeliveryRating("good");
-                    }}
-                  />
-                )}
-                Good
-              </IconContainer>
+            <RateContainer>
+              <div className="heading">Rate your Delivery Experience </div>
+              <FlexContainer>
+                <IconContainer>
+                  {deliveryRating == "good" ? (
+                    <FaGrinAlt className="icon" />
+                  ) : (
+                    <FaRegGrinAlt
+                      className="icon"
+                      values={deliveryRating}
+                      onClick={() => {
+                        setDeliveryRating("good");
+                      }}
+                    />
+                  )}
+                  Good
+                </IconContainer>
 
-              <IconContainer>
-                {deliveryRating == "okay" ? (
-                  <FaSmile className="icon" />
-                ) : (
-                  <FaRegSmile
-                    className="icon"
-                    onClick={() => setDeliveryRating("okay")}
-                  />
-                )}
-                Okay
-              </IconContainer>
+                <IconContainer>
+                  {deliveryRating == "okay" ? (
+                    <FaSmile className="icon" />
+                  ) : (
+                    <FaRegSmile
+                      className="icon"
+                      onClick={() => setDeliveryRating("okay")}
+                    />
+                  )}
+                  Okay
+                </IconContainer>
 
-              <IconContainer>
-                {deliveryRating === "bad" ? (
-                  <FaFrown className="icon" />
-                ) : (
-                  <FaRegFrown
-                    className="icon"
-                    onClick={() => setDeliveryRating("bad")}
-                  />
-                )}
-                Bad
-              </IconContainer>
-            </FlexContainer>
+                <IconContainer>
+                  {deliveryRating === "bad" ? (
+                    <FaFrown className="icon" />
+                  ) : (
+                    <FaRegFrown
+                      className="icon"
+                      onClick={() => setDeliveryRating("bad")}
+                    />
+                  )}
+                  Bad
+                </IconContainer>
+              </FlexContainer>
+            </RateContainer>
           </Form>
         </FeedbackContainer>
         <div style={{ textAlign: "center", padding: "28px 0px" }}>

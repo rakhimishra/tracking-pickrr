@@ -140,7 +140,8 @@ margin-left:0;
 `};
 `;
 export const CustomButton = styled(Button)`
-  width: 216px !important;
+  max-width: 216px !important;
+  width: 100%;
   height: 49px !important;
   background: linear-gradient(
     105.06deg,

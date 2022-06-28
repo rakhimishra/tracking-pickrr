@@ -172,7 +172,14 @@ const OrderInfocontainer = ({
                         return (
                           <div className="product-item" key={index}>
                             <FlexContainer>
-                              <div style={{ marginRight: 10 }}>{index + 1}</div>
+                              <div
+                                style={{
+                                  marginRight: "10px",
+                                  marginTop: "-20px",
+                                }}
+                              >
+                                {index + 1}
+                              </div>
                               <div>
                                 <div>{item?.item_name}</div>
                                 <div>Qty : {item?.quantity}</div>

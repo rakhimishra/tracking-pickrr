@@ -1,17 +1,12 @@
 import { Button } from "antd";
 import styled from "styled-components";
-import { FlexColContainer } from "../UIElements";
+import { FlexColContainer, FlexContainer } from "../UIElements";
 
 export const FeedbackContainer = styled.div`
   padding: 20px 34px;
   background-color: #fff;
   margin-top: 20px;
   border-radius: 10px;
-  .heading {
-    font-weight: 700;
-    font-size: 20px;
-    color: #38446d;
-  }
 `;
 
 export const Container = styled.div`
@@ -37,7 +32,25 @@ export const IconContainer = styled(FlexColContainer)`
   align-items: center;
   margin-left: 20px;
   .icon {
-    font-size: 34px;
+    font-size: 30px;
     color: #002659;
+  }
+`;
+
+export const RateContainer = styled(FlexContainer)`
+  justify-content: flex-start;
+  color: #38446d;
+  font-weight: 700;
+  .heading {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .heading {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
   }
 `;

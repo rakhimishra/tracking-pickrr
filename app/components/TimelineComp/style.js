@@ -1,5 +1,6 @@
-import { Timeline } from "antd";
+import { Timeline, Steps } from "antd";
 import styled from "styled-components";
+
 export const Item = styled.div`
   margin: 0px;
   font-weight: 400;
@@ -36,17 +37,25 @@ export const TimelineContainer = styled(Timeline)`
       background-color: #edf0f9;
     }
   }
-  .ant-timeline-item-head {
+  /* .ant-timeline-item-head {
     background-color: #158a2a;
     border: none;
-  }
+  } */
 `;
 
 export const Container = styled(Timeline)`
   .ant-timeline-item-tail {
-    border-left: 2px solid #158a2a;
+    /* border-left: 2px solid #158a2a; */
   }
   .ant-timeline-item-head-custom {
     padding: 0;
+  }
+`;
+
+export const NestedStepper = styled(Steps)`
+  .ant-steps-item-container {
+    margin-left: 5px;
+    z-index: 10000;
+    position: relative;
   }
 `;

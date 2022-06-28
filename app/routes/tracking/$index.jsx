@@ -66,7 +66,7 @@ function TrackingDetails() {
             value={trackingId}
             allowClear
           />
-          <CustomButton type="danger" onClick={handleClick}>
+          <CustomButton type="danger" onClick={handleClick} block>
             Track Order
           </CustomButton>
         </div>
