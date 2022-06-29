@@ -1,26 +1,33 @@
-import { Outlet, LiveReload, Link, Links, Meta, useLoaderData } from 'remix';
-import globalStylesUrl from '~/styles/global.css';
-// import { getUser } from '~/utils/session.server';
+import { Outlet, LiveReload, Links, Meta } from "remix";
+import {
+  // Links,
+  // LiveReload,
+  // Meta,
+  // Outlet,
+  Scripts,
+  useLoaderData,
+} from "@remix-run/react";
+import { useContext } from "react";
+import globalStylesUrl from "~/styles/global.css";
+import antdStyles from "antd/dist/antd.css";
+import PickrrHeader from "~/components/pickrr-header";
+import StylesContext from "./styles-context";
+import { Result } from "antd";
 
-export const links = () => [{ rel: 'stylesheet', href: globalStylesUrl }];
+export const links = () => [
+  { rel: "stylesheet", href: antdStyles },
+  { rel: "stylesheet", href: globalStylesUrl },
+];
 
 export const meta = () => {
-  const description = 'A cool blog built with Remix';
-  const keywords = 'remix, react, javascript';
+  const description = "Pickrr Tracking page";
+  const keywords = "remix, react, javascript";
 
   return {
     description,
     keywords,
   };
 };
-
-// export const loader = async ({ request }) => {
-//   const user = await getUser(request);
-//   const data = {
-//     user,
-//   };
-//   return data;
-// };
 
 export default function App() {
   return (
@@ -33,18 +40,24 @@ export default function App() {
 }
 
 function Document({ children, title }) {
+  const styles = useContext(StylesContext);
+
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {/* <link rel="icon" href="/favicon.png" type="image/png" /> */}
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        {title ? <title>{title}</title> : null}
         <Meta />
+        {typeof document === "undefined" ? "__STYLES__" : null}
+        {styles}
         <Links />
-        <title>Pickrr Tracking Page</title>
       </head>
       <body>
-        {children}
-        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        <div className="container"> {children}</div>
+        <Scripts />
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
   );
@@ -54,19 +67,16 @@ function Layout({ children }) {
   // const { user } = useLoaderData();
 
   return (
-    <>
-      <nav className="navbar">
-        <Link to="/" className="logo">
-          Pickrr
-        </Link>
-
-        <ul className="nav">
-          <li></li>
-        </ul>
-      </nav>
-
-      <div className="container">{children}</div>
-    </>
+    <div className="MainContainer">
+      <div className="container">
+        <PickrrHeader />
+        {children}
+      </div>
+      <img
+        style={{ width: "100%" }}
+        src="https://d10srchmli830n.cloudfront.net/1652867194453_e3b1cfc2-46b6-4959-b1e5-c2d02f51c30a_Group-27611.svg"
+      />
+    </div>
   );
 }
 
@@ -76,6 +86,27 @@ export function ErrorBoundary({ error }) {
       <Layout>
         <h1>Error</h1>
         <p>{error.message}</p>
+        <Result
+          status="500"
+          title="500"
+          subTitle="Sorry, something went wrong."
+          extra={
+            <div
+              style={{
+                fontSize: "16px",
+              }}
+            >
+              We apologize for the inconvenicence. Please reload the page and
+              try again.
+              <div>
+                If you continue to encounter this error contact our{" "}
+                <a href="mailto:support@pickrr.com" target="blank">
+                  pickrr support.
+                </a>
+              </div>
+            </div>
+          }
+        />
       </Layout>
     </Document>
   );
