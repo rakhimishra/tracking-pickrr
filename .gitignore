@@ -4,3 +4,6 @@
 /.cache
 /prisma/dev.db
 .env
+# Local Netlify folder
+.netlify
+package-lock.json

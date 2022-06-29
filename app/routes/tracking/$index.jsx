@@ -48,8 +48,6 @@ function TrackingDetails() {
     }
   }, [data]);
 
-  console.log(data);
-
   return (
     <div>
       <Container>

@@ -117,7 +117,6 @@ const TimelineComp = ({ trackArr }) => {
   const statusTobeShown = trackArr?.filter((o1) =>
     validStatuses.some((o2) => o1?.status_name === o2)
   );
-  console.log(statusTobeShown, "status");
 
   function getDifference(array1, array2) {
     return array1?.filter((object1) => {

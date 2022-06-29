@@ -7,6 +7,11 @@ export const FeedbackContainer = styled.div`
   background-color: #fff;
   margin-top: 20px;
   border-radius: 10px;
+  .heading {
+    font-weight: 700;
+    font-size: 24px;
+    color: #38446d;
+  }
 `;
 
 export const Container = styled.div`
