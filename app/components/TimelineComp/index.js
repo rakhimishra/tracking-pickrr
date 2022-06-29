@@ -28,6 +28,11 @@ const TimelineComp = ({ trackArr }) => {
     "RTO",
   ];
 
+  const STATUS_TIME = [trackArr[trackArr.length - 1].status_array[0]][0]
+    .status_time;
+  const STATUS_LOC = [trackArr[trackArr.length - 1].status_array[0]][0]
+    .status_location;
+
   const arr = [
     {
       status_name: "OP",
@@ -37,8 +42,8 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "Order Placed",
           pickrr_sub_status_code: "",
           status_body: "Order Placed",
-          status_location: null,
-          status_time: "2022-06-20T07:25:19.000Z",
+          status_location: STATUS_LOC,
+          status_time: STATUS_TIME,
         },
       ],
     },
@@ -50,8 +55,8 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "Order Picked Up",
           pickrr_sub_status_code: "",
           status_body: "PICK UP SCAN ON FIELD",
-          status_location: "COD PROCESSING CENTRE I",
-          status_time: "2022-06-20T07:50:00.000Z",
+          status_location: STATUS_LOC,
+          status_time: STATUS_TIME,
         },
       ],
     },
@@ -63,8 +68,8 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "SHIPMENT INSCAN",
           pickrr_sub_status_code: "",
           status_body: "PICK UP SCAN ON FIELD",
-          status_location: "COD PROCESSING CENTRE I",
-          status_time: "2022-06-20T07:50:00.000Z",
+          status_location: STATUS_LOC,
+          status_time: STATUS_TIME,
         },
       ],
     },
@@ -77,7 +82,7 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_sub_status_code: "",
           status_body: "SHIPMENT INSCAN",
           status_location: "COD PROCESSING CENTRE I",
-          status_time: "2022-06-20T12:21:00.000Z",
+          status_time: STATUS_TIME,
         },
       ],
     },
@@ -89,8 +94,8 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "Shipment out for delivery",
           pickrr_sub_status_code: "",
           status_body: "SHIPMENT INSCAN",
-          status_location: "COD PROCESSING CENTRE I",
-          status_time: "2022-06-20T12:21:00.000Z",
+          status_location: STATUS_LOC,
+          status_time: STATUS_TIME,
         },
       ],
     },
@@ -102,8 +107,8 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "Delivered",
           pickrr_sub_status_code: "",
           status_body: "SHIPMENT INSCAN",
-          status_location: "COD PROCESSING CENTRE I",
-          status_time: "2022-06-20T12:21:00.000Z",
+          status_location: STATUS_LOC,
+          status_time: STATUS_TIME,
         },
       ],
     },
@@ -125,12 +130,7 @@ const TimelineComp = ({ trackArr }) => {
     ...getDifference(arr, statusTobeShown),
     // ...getDifference(statusTobeShown, arr),
   ];
-  let lastObj = [trackArr[trackArr.length - 1].status_array[0]];
 
-  let mani = lastObj.map(
-    (obj) => difference.find((o) => o.status_name === obj.status_name) || obj
-  );
-  console.log(mani, "mani");
   let parentArray = [...statusTobeShown, ...difference];
   const userExists = () => {
     return parentArray.some(function (el) {
