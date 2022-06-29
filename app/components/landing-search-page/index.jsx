@@ -51,7 +51,7 @@ function LandingSearchPage() {
           />
           <Link to={`/tracking/${input}`}>
             <CustomButton type="primary">Track Order</CustomButton>
-          </Link>
+          </Link>{" "}
         </div>
         <div className="powered">Powered by Pickrr </div>
       </MainContainer>

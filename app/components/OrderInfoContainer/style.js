@@ -101,6 +101,9 @@ export const OrderItem = styled.div`
     border: none;
     padding: 0px;
     font-size: 14px;
+    .content {
+      float: right;
+    }
   }
 `;
 
@@ -181,7 +184,7 @@ export const StatusContainer = styled.div`
         justify-content: space-between;
         margin-top: 17px;
         margin: 15px;
-        align-items: center;
+        align-items: flex-start;
       }
     }
     @media screen and (max-width: 768px) {

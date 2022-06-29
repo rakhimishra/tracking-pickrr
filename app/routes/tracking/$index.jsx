@@ -1,6 +1,6 @@
 import { useLoaderData } from "remix";
 import { Title, CustomInput, CustomButton } from "~/components/UIElements";
-import { MainContainer, Container } from "./style";
+import { MainContainer, Container, PoweredContainer } from "./style";
 import OrderInfocontainer from "~/components/OrderInfoContainer";
 import { useState, useEffect } from "react";
 import { getTrackingDetails } from "~/utils/server.query";
@@ -115,13 +115,13 @@ function TrackingDetails() {
                       <OrderInfocontainer
                         courier={data.courier_used}
                         status={data?.status?.current_status_type}
-                        orderDate={data.order_created_at}
-                        orderId={data.client_order_id}
-                        expectedDelivery={data.edd_stamp}
-                        lastUpdate={data.last_update_from_order_ms}
+                        orderDate={data?.order_created_at}
+                        orderId={data?.client_order_id}
+                        expectedDelivery={data?.edd_stamp}
+                        lastUpdate={data?.last_update_from_order_ms}
                         isMultiOrder={isMultiOrder}
-                        itemList={data.item_list}
-                        trackArr={data.track_arr}
+                        itemList={data?.item_list}
+                        trackArr={data?.track_arr}
                         data={data}
                       />
                     </div>
@@ -131,6 +131,7 @@ function TrackingDetails() {
             </MainContainer>
           )
         )}
+        <PoweredContainer>Powered by Pickrr</PoweredContainer>
       </Container>
     </div>
   );

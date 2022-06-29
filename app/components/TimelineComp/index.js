@@ -12,8 +12,6 @@ import {
 } from "./style";
 import { Color } from "../OrderInfoContainer/utils";
 const TimelineComp = ({ trackArr }) => {
-  // const { Step } = Steps;
-  // const [show, setShow] = useState(false);
   const [currIndex, setCurrIndex] = useState(null);
 
   const validStatuses = [
@@ -28,10 +26,12 @@ const TimelineComp = ({ trackArr }) => {
     "RTO",
   ];
 
-  const STATUS_TIME = [trackArr[trackArr.length - 1].status_array[0]][0]
-    .status_time;
-  const STATUS_LOC = [trackArr[trackArr.length - 1].status_array[0]][0]
-    .status_location;
+  const STATUS_TIME =
+    trackArr &&
+    [trackArr[trackArr?.length - 1]?.status_array[0]][0]?.status_time;
+  const STATUS_LOC =
+    trackArr &&
+    [trackArr[trackArr?.length - 1]?.status_array[0]][0]?.status_location;
 
   const arr = [
     {
@@ -81,7 +81,7 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "Order in Transit",
           pickrr_sub_status_code: "",
           status_body: "SHIPMENT INSCAN",
-          status_location: "COD PROCESSING CENTRE I",
+          status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
       ],
@@ -114,42 +114,46 @@ const TimelineComp = ({ trackArr }) => {
     },
   ];
 
-  const statusTobeShown = trackArr.filter((o1) =>
-    validStatuses.some((o2) => o1.status_name === o2)
+  const statusTobeShown = trackArr?.filter((o1) =>
+    validStatuses.some((o2) => o1?.status_name === o2)
   );
+  console.log(statusTobeShown, "status");
 
   function getDifference(array1, array2) {
-    return array1.filter((object1) => {
-      return !array2.some((object2) => {
-        return object1.status_name === object2.status_name;
+    return array1?.filter((object1) => {
+      return !array2?.some((object2) => {
+        return object1?.status_name === object2?.status_name;
       });
     });
   }
 
-  const difference = [
-    ...getDifference(arr, statusTobeShown),
-    // ...getDifference(statusTobeShown, arr),
-  ];
+  const difference = [...getDifference(arr, statusTobeShown)];
 
   let parentArray = [...statusTobeShown, ...difference];
-  const userExists = () => {
-    return parentArray.some(function (el) {
-      return el.status_name === "OC";
+  const cancelStatusExists = () => {
+    return statusTobeShown?.some(function (el) {
+      return (
+        el?.status_name === "OC" ||
+        el?.status_name === "RTO" ||
+        el?.status_name === "DL"
+      );
     });
   };
-  const actualArray = userExists() ? trackArr : parentArray;
+  const actualArray = cancelStatusExists()
+    ? statusTobeShown && statusTobeShown
+    : parentArray;
 
   return (
     <div>
-      <Container lengt={statusTobeShown.length}>
+      <Container lengt={statusTobeShown?.length}>
         {actualArray?.map((track, index) => {
           return (
             <Timeline.Item
               color={
-                index > parentArray.length - difference.length - 1
+                index > parentArray?.length - difference?.length - 1
                   ? "#EDF0F9"
-                  : track.status_name == "OC" || track.status_name == "NDR"
-                  ? Color(track.status_name)
+                  : track?.status_name == "OC" || track?.status_name == "NDR"
+                  ? Color(track?.status_name)
                   : "green"
               }
               key={index}
@@ -160,7 +164,7 @@ const TimelineComp = ({ trackArr }) => {
                     width: "15px",
                     borderRadius: "50%",
                     background:
-                      index > parentArray.length - difference.length - 1
+                      index > parentArray?.length - difference?.length - 1
                         ? "#EDF0F9"
                         : track.status_name == "OC" ||
                           track.status_name == "NDR"
@@ -170,10 +174,10 @@ const TimelineComp = ({ trackArr }) => {
                 ></div>
               }
               style={{
-                cursor: track.status_array.length > 1 && "pointer",
+                cursor: track?.status_array?.length > 1 && "pointer",
               }}
               onClick={() => {
-                if (track.status_array.length > 1) {
+                if (track?.status_array?.length > 1) {
                   setCurrIndex(index);
                   // setShow(currIndex === index);
                 }
@@ -182,44 +186,44 @@ const TimelineComp = ({ trackArr }) => {
               <HeadingItem
                 style={{
                   color:
-                    index > parentArray.length - difference.length - 1
+                    index > parentArray?.length - difference?.length - 1
                       ? "#EDF0F9"
                       : "#2D3F93",
                 }}
               >
-                {track.status_array[0].pickrr_status}{" "}
+                {track?.status_array[0]?.pickrr_status}{" "}
                 <span style={{ color: "#EF7E00" }}>
-                  {track.status_array.length > 1 && "(New Update)"}
+                  {track?.status_array?.length > 1 && "(New Update)"}
                 </span>
               </HeadingItem>
               <Item
                 style={{
                   color:
-                    index > parentArray.length - difference.length - 1
+                    index > parentArray?.length - difference?.length - 1
                       ? "#EDF0F9"
                       : "#2D3F93",
                 }}
               >
                 Last updated on{" "}
-                {moment(track.status_array[0].status_time).format(
+                {moment(track?.status_array[0]?.status_time).format(
                   "MMMM Do YYYY-hh:mm a"
                 )}
               </Item>
               <Item
                 style={{
                   color:
-                    index > parentArray.length - difference.length - 1
+                    index > parentArray?.length - difference?.length - 1
                       ? "#EDF0F9"
                       : "#2D3F93",
                 }}
               >
-                {track.status_array[0].status_location}
+                {track?.status_array[0]?.status_location}
               </Item>
-              {index === currIndex && track.status_array.length > 1 ? (
+              {index === currIndex && track?.status_array?.length > 1 ? (
                 <TimelineContainer
                   style={{ marginLeft: "-26px", marginTop: 15 }}
                 >
-                  {track?.status_array.map((tracking, ind) => {
+                  {track?.status_array?.map((tracking, ind) => {
                     return (
                       <Timeline.Item
                         color="green"
@@ -232,24 +236,24 @@ const TimelineComp = ({ trackArr }) => {
                               borderRadius: "50%",
                               background:
                                 index >
-                                parentArray.length - difference.length - 1
+                                parentArray?.length - difference?.length - 1
                                   ? "#EDF0F9"
-                                  : track.status_name == "OC" ||
-                                    track.status_name == "NDR"
+                                  : track?.status_name == "OC" ||
+                                    track?.status_name == "NDR"
                                   ? Color(track.status_name)
                                   : "green",
                             }}
                           ></div>
                         }
                       >
-                        <SmallItem>{tracking.pickrr_status} </SmallItem>
+                        <SmallItem>{tracking?.pickrr_status} </SmallItem>
                         <SmallItem>
                           Last updated on{" "}
-                          {moment(tracking.status_time).format(
+                          {moment(tracking?.status_time).format(
                             "MMMM Do YYYY-hh:mm a"
                           )}
                         </SmallItem>
-                        <SmallItem>{tracking.status_location}</SmallItem>
+                        <SmallItem>{tracking?.status_location}</SmallItem>
                       </Timeline.Item>
                     );
                   })}
