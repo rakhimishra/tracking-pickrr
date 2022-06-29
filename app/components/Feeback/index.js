@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 
 const Feedback = ({ data }) => {
-  const { courier_parent_name } = data;
+  const { company_name } = data;
   const [customerFeedback, setCustomerFeedback] = useState(null);
   const [deliveryRating, setDeliveryRating] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -112,7 +112,8 @@ const Feedback = ({ data }) => {
       <Container>
         <FeedbackContainer>
           <div className="heading">
-            How was the experience with {courier_parent_name}
+            How was your experience {company_name ? "with" : ""}{" "}
+            {company_name ? company_name : ""}
           </div>
           <Rate
             allowClear={false}
@@ -120,7 +121,6 @@ const Feedback = ({ data }) => {
             // defaultValue={rating}
             style={{ color: "#717BAD", fontSize: "32px" }}
             onChange={(value) => {
-              console.log(value);
               setRating(value);
             }}
           />

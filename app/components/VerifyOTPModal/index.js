@@ -56,14 +56,14 @@ const VerifyOTPModal = ({
               you as a buyer
             </SmallerText>
           </Col>
-          <Col span={18} offset={3}>
+          <Col span={18} offset={3} className="mb-10">
             <CustomInput
               placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
             />
           </Col>
-          <Col span={18} offset={3}>
+          <Col span={18} offset={3} style={{ marginTop: "20px" }}>
             <SpaceBetweenContainer>
               <ResendButton onClick={sendOTP}>Resend OTP</ResendButton>
               <VerifyButton onClick={handleVerify} loading={modalLoading}>

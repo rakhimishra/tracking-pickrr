@@ -4,10 +4,12 @@ import { HeaderContainer } from "./style";
 const PickrrHeader = () => {
   return (
     <HeaderContainer>
-      <img
-        src="https://d10srchmli830n.cloudfront.net/1652868953482_38eddf50-89ad-4916-adea-0861e26a95b4_Group-(1).svg"
-        alt="pickrr_logo"
-      />
+      <a href="http://pickrr.com/">
+        <img
+          src="https://d10srchmli830n.cloudfront.net/1652868953482_38eddf50-89ad-4916-adea-0861e26a95b4_Group-(1).svg"
+          alt="pickrr_logo"
+        />
+      </a>
       <div className="social-icon-container">
         <a href="https://www.facebook.com/pickrr/" target="_blank">
           <img src="https://d10srchmli830n.cloudfront.net/1652950946901_035ad2b7-09b4-4e78-93c3-c310286c3e8b_bi_facebook.svg" />
