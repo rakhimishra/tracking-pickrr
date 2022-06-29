@@ -192,9 +192,10 @@ const OrderInfocontainer = ({
                       }
                     }
                   })}
-                {itemList.length > 2 && !showMoreItems && (
+                {itemList?.length > 2 && !showMoreItems && (
                   <ViewMore onClick={handleshowMoreItems}>
-                    +{itemList.length - 2} more
+                    {"+"}
+                    {itemList.length - 2} more
                   </ViewMore>
                 )}
               </div>

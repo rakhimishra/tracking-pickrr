@@ -115,13 +115,13 @@ function TrackingDetails() {
                       <OrderInfocontainer
                         courier={data.courier_used}
                         status={data?.status?.current_status_type}
-                        orderDate={data.order_created_at}
-                        orderId={data.client_order_id}
-                        expectedDelivery={data.edd_stamp}
-                        lastUpdate={data.last_update_from_order_ms}
+                        orderDate={data?.order_created_at}
+                        orderId={data?.client_order_id}
+                        expectedDelivery={data?.edd_stamp}
+                        lastUpdate={data?.last_update_from_order_ms}
                         isMultiOrder={isMultiOrder}
-                        itemList={data.item_list}
-                        trackArr={data.track_arr}
+                        itemList={data?.item_list}
+                        trackArr={data?.track_arr}
                         data={data}
                       />
                     </div>
@@ -131,6 +131,7 @@ function TrackingDetails() {
             </MainContainer>
           )
         )}
+        <div>Powered by Pickrr</div>
       </Container>
     </div>
   );
