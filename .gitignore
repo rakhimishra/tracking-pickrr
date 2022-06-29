@@ -4,3 +4,5 @@
 /.cache
 /prisma/dev.db
 .env
+# Local Netlify folder
+.netlify
