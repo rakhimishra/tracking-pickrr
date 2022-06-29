@@ -16,8 +16,9 @@ import { CheckOrderStatus, Color } from "./utils";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import moment from "moment";
 import Feedback from "../Feeback";
-import { FlexContainer } from "../UIElements";
+import { FlexContainer, SpaceBetweenContainer } from "../UIElements";
 import TimelineComp from "../TimelineComp";
+import { useMediaQuery } from "react-responsive";
 
 const OrderItems = ({ title, content, css }) => {
   return (
@@ -37,6 +38,8 @@ const icons = {
   OT: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
   OP: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
   OO: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
+  PP: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
+  SHP: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
 };
 
 const OrderInfocontainer = ({
@@ -51,6 +54,9 @@ const OrderInfocontainer = ({
   trackArr,
   data,
 }) => {
+  const isMobileDevice = useMediaQuery({
+    query: "(max-device-width: 768px)",
+  });
   const [isViewMore, setIsViewMore] = useState(false);
   const [showMoreItems, setShowMoreItems] = useState(false);
 
@@ -95,36 +101,45 @@ const OrderInfocontainer = ({
             </a>
           </div>
         </Container>
-        <Row style={{ marginTop: "12px" }} gutter="16px" justify="end">
-          <Col xl={6} lg={6} md={12} sm={12} xs={12}>
-            <OrderItems
-              title="Order Date"
-              content={moment(orderDate).format("MMMM Do YYYY")}
-              css={{ float: "center" }}
-            />
-          </Col>
-          <Col xl={6} lg={6} md={12} sm={12} xs={12}>
-            <OrderItems
-              title="Order ID "
-              content={orderId}
-              css={{ borderRight: 0, float: "center" }}
-            />
-          </Col>
-          <Col xl={6} lg={6} md={12} sm={12} xs={12}>
-            <OrderItems
-              title="Courier"
-              content={courier}
-              css={{ float: "center" }}
-            />
-          </Col>
-          <Col xl={6} lg={6} md={12} sm={12} xs={12}>
-            <OrderItems
-              title="Payment Mode"
-              content="Prepaid"
-              css={{ borderRight: 0, float: "center" }}
-            />
-          </Col>
-        </Row>
+        {!isMobileDevice ? (
+          <Row style={{ marginTop: "12px" }} gutter="16px" justify="end">
+            <Col xl={6} lg={6} md={12} sm={12} xs={12}>
+              <OrderItems
+                title="Order Date"
+                content={moment(orderDate).format("MMMM Do YYYY")}
+              />
+            </Col>
+            <Col xl={6} lg={6} md={12} sm={12} xs={12}>
+              <OrderItems title="Order ID " content={orderId} />
+            </Col>
+            <Col xl={6} lg={6} md={12} sm={12} xs={12}>
+              <OrderItems title="Courier" content={courier} />
+            </Col>
+            <Col xl={6} lg={6} md={12} sm={12} xs={12}>
+              <OrderItems
+                title="Payment Mode"
+                content={!data?.is_cod ? "Prepaid" : "COD"}
+              />
+            </Col>
+          </Row>
+        ) : (
+          <>
+            <SpaceBetweenContainer style={{ marginTop: "12px" }}>
+              <OrderItems
+                title="Order Date"
+                content={moment(new Date(orderDate))?.format("MMMM Do YYYY")}
+              />
+              <OrderItems title="Order ID " content={orderId} />
+            </SpaceBetweenContainer>
+            <SpaceBetweenContainer style={{ marginTop: "12px" }}>
+              <OrderItems title="Courier" content={courier} />
+              <OrderItems
+                title="Payment Mode"
+                content={!data?.is_cod ? "Prepaid" : "COD"}
+              />
+            </SpaceBetweenContainer>
+          </>
+        )}
       </MainContainer>
       {isMultiOrder && (
         <div
@@ -158,7 +173,7 @@ const OrderInfocontainer = ({
                     if (index < 2) {
                       return (
                         <div className="product-item" key={index}>
-                          <FlexContainer>
+                          <FlexContainer style={{ alignItems: "flex-start" }}>
                             <div style={{ marginRight: 10 }}>{index + 1}</div>
                             <div>
                               <div>{item?.item_name}</div>
@@ -176,14 +191,20 @@ const OrderInfocontainer = ({
                               <div
                                 style={{
                                   marginRight: "10px",
-                                  marginTop: "-20px",
                                 }}
                               >
                                 {index + 1}
                               </div>
                               <div>
                                 <div>{item?.item_name}</div>
-                                <div>Qty : {item?.quantity}</div>
+                                <div
+                                  style={{
+                                    marginRight: "10px",
+                                    marginTop: "-20px",
+                                  }}
+                                >
+                                  Qty : {item?.quantity}
+                                </div>
                               </div>
                             </FlexContainer>
                             <div className="prepaid">₹{item?.price}</div>

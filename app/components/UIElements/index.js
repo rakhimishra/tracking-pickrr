@@ -66,7 +66,6 @@ export const FlexBox = styled.div`
 export const SpaceBetweenContainerDesktop = styled.div`
   display: flex;
   justify-content: space-between;
-
   flex-direction: row;
   ${media.mobile`
   flex-direction:column;
@@ -140,8 +139,8 @@ margin-left:0;
 `};
 `;
 export const CustomButton = styled(Button)`
-  max-width: 216px !important;
-  width: 100%;
+  width: 216px !important;
+  /* width: 100%; */
   height: 49px !important;
   background: linear-gradient(
     105.06deg,
@@ -153,6 +152,13 @@ export const CustomButton = styled(Button)`
     #9a0200 150.8%
   ) !important;
   border-radius: 10px !important;
+  @media screen and (max-width: 648px) {
+    margin-top: 10px;
+    width: 100% !important;
+    .ant-btn-primary {
+      width: 100%;
+    }
+  }
 `;
 export const FacebookBrandButton = styled(Button)`
   background: #fff;

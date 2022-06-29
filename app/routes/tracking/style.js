@@ -7,8 +7,9 @@ export const Container = styled.div`
     display: flex;
     margin-bottom: 20px;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 648px) {
     width: 100%;
+    padding: 30px 15px;
     .search-container {
       flex-direction: column;
     }
@@ -25,11 +26,11 @@ export const MainContainer = styled.div`
   .order-info-container {
     margin-top: 30px;
   }
+`;
 
-  @media screen and (max-width: 768px) {
-    padding: 30px 15px;
-    .search-container {
-      flex-direction: column;
-    }
-  }
+export const PoweredContainer = styled.div`
+  text-align: center;
+  margin-top: 85px;
+  text-decoration-line: underline;
+  color: #38446d;
 `;

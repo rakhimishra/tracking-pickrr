@@ -81,7 +81,7 @@ const TimelineComp = ({ trackArr }) => {
           pickrr_status: "Order in Transit",
           pickrr_sub_status_code: "",
           status_body: "SHIPMENT INSCAN",
-          status_location: "COD PROCESSING CENTRE I",
+          status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
       ],
@@ -117,6 +117,7 @@ const TimelineComp = ({ trackArr }) => {
   const statusTobeShown = trackArr?.filter((o1) =>
     validStatuses.some((o2) => o1?.status_name === o2)
   );
+  console.log(statusTobeShown, "status");
 
   function getDifference(array1, array2) {
     return array1?.filter((object1) => {
@@ -126,18 +127,21 @@ const TimelineComp = ({ trackArr }) => {
     });
   }
 
-  const difference = [
-    ...getDifference(arr, statusTobeShown),
-    // ...getDifference(statusTobeShown, arr),
-  ];
+  const difference = [...getDifference(arr, statusTobeShown)];
 
   let parentArray = [...statusTobeShown, ...difference];
-  const userExists = () => {
-    return parentArray?.some(function (el) {
-      return el?.status_name === "OC";
+  const cancelStatusExists = () => {
+    return statusTobeShown?.some(function (el) {
+      return (
+        el?.status_name === "OC" ||
+        el?.status_name === "RTO" ||
+        el?.status_name === "DL"
+      );
     });
   };
-  const actualArray = userExists() ? trackArr && trackArr : parentArray;
+  const actualArray = cancelStatusExists()
+    ? statusTobeShown && statusTobeShown
+    : parentArray;
 
   return (
     <div>

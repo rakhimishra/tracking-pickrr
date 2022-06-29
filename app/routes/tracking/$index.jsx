@@ -1,6 +1,6 @@
 import { useLoaderData } from "remix";
 import { Title, CustomInput, CustomButton } from "~/components/UIElements";
-import { MainContainer, Container } from "./style";
+import { MainContainer, Container, PoweredContainer } from "./style";
 import OrderInfocontainer from "~/components/OrderInfoContainer";
 import { useState, useEffect } from "react";
 import { getTrackingDetails } from "~/utils/server.query";
@@ -131,7 +131,7 @@ function TrackingDetails() {
             </MainContainer>
           )
         )}
-        <div>Powered by Pickrr</div>
+        <PoweredContainer>Powered by Pickrr</PoweredContainer>
       </Container>
     </div>
   );

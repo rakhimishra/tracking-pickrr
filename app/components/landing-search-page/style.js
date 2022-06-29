@@ -36,6 +36,14 @@ export const MainContainer = styled.div`
     text-decoration-line: underline;
     color: #38446d;
   }
+
+  @media screen and (max-width: 640px) {
+    padding: 15px 10px;
+    .input-button-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 export const LandingSearchPageContainer = styled.div`
@@ -46,6 +54,7 @@ export const LandingSearchPageContainer = styled.div`
 `;
 export const CustomButton = styled(Button)`
   width: 216px !important;
+  /* width: 100%; */
   height: 49px !important;
   background: linear-gradient(
     105.06deg,
@@ -57,4 +66,11 @@ export const CustomButton = styled(Button)`
     #9a0200 150.8%
   ) !important;
   border-radius: 10px !important;
+  @media screen and (max-width: 648px) {
+    margin-top: 10px;
+    width: 100% !important;
+    .ant-btn-primary {
+      width: 100%;
+    }
+  }
 `;
