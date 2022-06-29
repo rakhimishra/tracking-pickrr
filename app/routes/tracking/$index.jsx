@@ -36,8 +36,6 @@ function TrackingDetails() {
     } else {
       setIsLoading(true);
       window.location.href = `/tracking/${trackingId}`;
-      const data = await getTrackingDetails(trackingId);
-
       setData({ ...data });
       setIsLoading(false);
     }

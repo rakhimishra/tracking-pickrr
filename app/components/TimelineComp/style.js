@@ -44,8 +44,9 @@ export const TimelineContainer = styled(Timeline)`
 `;
 
 export const Container = styled(Timeline)`
-  .ant-timeline-item-tail {
-    /* border-left: 2px solid #158a2a; */
+  .ant-timeline-item:nth-child(-n + ${(props) => props.lengt})
+    .ant-timeline-item-tail {
+    border: 1px solid #158a2a;
   }
   .ant-timeline-item-head-custom {
     padding: 0;

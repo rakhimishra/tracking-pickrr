@@ -49,7 +49,7 @@ function LandingSearchPage() {
             value={input}
             allowClear
           />
-          <Link to={`/tracking/#/${input}`}>
+          <Link to={`/tracking/${input}`}>
             <CustomButton type="primary">Track Order</CustomButton>
           </Link>
         </div>

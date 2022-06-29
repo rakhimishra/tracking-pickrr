@@ -3,13 +3,17 @@ import moment from "moment";
 import { Divider, Steps } from "antd";
 import { Timeline } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
-import { Item, HeadingItem, TimelineContainer, Container } from "./style";
+import {
+  Item,
+  HeadingItem,
+  TimelineContainer,
+  Container,
+  SmallItem,
+} from "./style";
 import { Color } from "../OrderInfoContainer/utils";
-import TimelineItem from "./TimelineItem";
 const TimelineComp = ({ trackArr }) => {
-  const { Step } = Steps;
-
-  const [show, setShow] = useState(false);
+  // const { Step } = Steps;
+  // const [show, setShow] = useState(false);
   const [currIndex, setCurrIndex] = useState(null);
 
   const validStatuses = [
@@ -105,7 +109,7 @@ const TimelineComp = ({ trackArr }) => {
     },
   ];
 
-  let statusTobeShown = trackArr.filter((o1) =>
+  const statusTobeShown = trackArr.filter((o1) =>
     validStatuses.some((o2) => o1.status_name === o2)
   );
 
@@ -121,18 +125,23 @@ const TimelineComp = ({ trackArr }) => {
     ...getDifference(arr, statusTobeShown),
     // ...getDifference(statusTobeShown, arr),
   ];
+  let lastObj = [trackArr[trackArr.length - 1].status_array[0]];
 
+  let mani = lastObj.map(
+    (obj) => difference.find((o) => o.status_name === obj.status_name) || obj
+  );
+  console.log(mani, "mani");
   let parentArray = [...statusTobeShown, ...difference];
-
   const userExists = () => {
     return parentArray.some(function (el) {
       return el.status_name === "OC";
     });
   };
   const actualArray = userExists() ? trackArr : parentArray;
+
   return (
     <div>
-      <Container>
+      <Container lengt={statusTobeShown.length}>
         {actualArray?.map((track, index) => {
           return (
             <Timeline.Item
@@ -144,14 +153,29 @@ const TimelineComp = ({ trackArr }) => {
                   : "green"
               }
               key={index}
-              dot={<CheckCircleFilled />}
+              dot={
+                <div
+                  style={{
+                    height: "15px",
+                    width: "15px",
+                    borderRadius: "50%",
+                    background:
+                      index > parentArray.length - difference.length - 1
+                        ? "#EDF0F9"
+                        : track.status_name == "OC" ||
+                          track.status_name == "NDR"
+                        ? Color(track.status_name)
+                        : "green",
+                  }}
+                ></div>
+              }
               style={{
                 cursor: track.status_array.length > 1 && "pointer",
               }}
-              onClick={(e) => {
+              onClick={() => {
                 if (track.status_array.length > 1) {
                   setCurrIndex(index);
-                  setShow(!show);
+                  // setShow(currIndex === index);
                 }
               }}
             >
@@ -176,8 +200,9 @@ const TimelineComp = ({ trackArr }) => {
                       : "#2D3F93",
                 }}
               >
+                Last updated on{" "}
                 {moment(track.status_array[0].status_time).format(
-                  "MMMM Do YYYY"
+                  "MMMM Do YYYY-hh:mm a"
                 )}
               </Item>
               <Item
@@ -190,12 +215,43 @@ const TimelineComp = ({ trackArr }) => {
               >
                 {track.status_array[0].status_location}
               </Item>
-              {index === currIndex && show && track.status_array.length > 1 ? (
+              {index === currIndex && track.status_array.length > 1 ? (
                 <TimelineContainer
                   style={{ marginLeft: "-26px", marginTop: 15 }}
                 >
                   {track?.status_array.map((tracking, ind) => {
-                    return <TimelineItem show tracking={tracking} />;
+                    return (
+                      <Timeline.Item
+                        color="green"
+                        key={ind}
+                        dot={
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "50%",
+                              background:
+                                index >
+                                parentArray.length - difference.length - 1
+                                  ? "#EDF0F9"
+                                  : track.status_name == "OC" ||
+                                    track.status_name == "NDR"
+                                  ? Color(track.status_name)
+                                  : "green",
+                            }}
+                          ></div>
+                        }
+                      >
+                        <SmallItem>{tracking.pickrr_status} </SmallItem>
+                        <SmallItem>
+                          Last updated on{" "}
+                          {moment(tracking.status_time).format(
+                            "MMMM Do YYYY-hh:mm a"
+                          )}
+                        </SmallItem>
+                        <SmallItem>{tracking.status_location}</SmallItem>
+                      </Timeline.Item>
+                    );
                   })}
                 </TimelineContainer>
               ) : null}
