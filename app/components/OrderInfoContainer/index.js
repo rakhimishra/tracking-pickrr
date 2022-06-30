@@ -53,6 +53,7 @@ const OrderInfocontainer = ({
   itemList,
   trackArr,
   data,
+  resData,
 }) => {
   const isMobileDevice = useMediaQuery({
     query: "(max-device-width: 768px)",
@@ -63,6 +64,14 @@ const OrderInfocontainer = ({
   const handleshowMoreItems = () => {
     setShowMoreItems(!showMoreItems);
   };
+
+  if (resData.err) {
+    return (
+      <MainContainer style={{ color: "#FF0006" }}>
+        {`Tracking Id ${resData.tracking_id} Not Found`}
+      </MainContainer>
+    );
+  }
 
   return (
     <div>
@@ -82,7 +91,7 @@ const OrderInfocontainer = ({
             </div>
           </div>
           <div className="supportContainer">
-            {status !== "delivered" && (
+            {status !== "DL" && (
               <div className="expectedContainer">
                 <div className="expected">Expected Delivery </div>
                 <div className="delivery-info">

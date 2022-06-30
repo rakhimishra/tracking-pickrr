@@ -15,15 +15,7 @@ function LandingSearchPage() {
   const handleEnterKey = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       e.target.blur();
-      handleTrack();
-    }
-  };
-  const handleBtnClick = () => {
-    if (!trackingId) {
-      notification.error({ message: "Please enter Tracking ID" });
-      return;
-    } else {
-      navigate(`/tracking/#/${trackingId}`, { replace: true });
+      window.location.href = `/tracking/${trackingId}`;
     }
   };
 

@@ -5,6 +5,7 @@ import OrderInfocontainer from "~/components/OrderInfoContainer";
 import { useState, useEffect } from "react";
 import { getTrackingDetails } from "~/utils/server.query";
 import { notification } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 export const loader = async ({ params }) => {
   const trackingId = params.index;
@@ -47,6 +48,12 @@ function TrackingDetails() {
       setIsError({ errorStatus: false, message: "" });
     }
   }, [data]);
+  const handleEnterKey = (e) => {
+    if (e.keyCode === 13 || e.which === 13) {
+      e.target.blur();
+      window.location.href = `/tracking/${trackingId}`;
+    }
+  };
 
   return (
     <div>
@@ -61,6 +68,7 @@ function TrackingDetails() {
             }}
             value={trackingId}
             allowClear
+            onKeyDown={handleEnterKey}
           />
           <CustomButton type="danger" onClick={handleClick} block>
             Track Order
@@ -73,60 +81,58 @@ function TrackingDetails() {
           </div>
         )}
         {isLoading ? (
-          <div>Loading</div>
+          <LoadingOutlined style={{ fontSize: 24 }} spin />
         ) : (
           !data?.err && (
-            <MainContainer>
-              <div>
-                <div className="order-info-container">
-                  {isMultiOrder ? (
-                    data?.response_list?.map((trackingData, index) => {
-                      const {
-                        courier_used,
-                        status,
-                        order_created_at,
-                        client_order_id,
-                        edd_stamp,
-                        last_update_from_order_ms,
-                        item_list,
-                        track_arr,
-                      } = trackingData;
-                      return (
-                        <div style={{ marginBottom: "30px" }} key={index}>
-                          <OrderInfocontainer
-                            courier={courier_used}
-                            status={status?.current_status_type}
-                            orderDate={order_created_at}
-                            orderId={client_order_id}
-                            expectedDelivery={edd_stamp}
-                            lastUpdate={last_update_from_order_ms}
-                            isMultiOrder={isMultiOrder}
-                            itemList={item_list}
-                            trackArr={track_arr}
-                            data={data}
-                          />
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div style={{ marginBottom: "30px" }}>
+            <div className="order-info-container">
+              {isMultiOrder ? (
+                data?.response_list?.map((trackingData, index) => {
+                  const {
+                    courier_used,
+                    status,
+                    order_created_at,
+                    client_order_id,
+                    edd_stamp,
+                    last_update_from_order_ms,
+                    item_list,
+                    track_arr,
+                  } = trackingData;
+                  return (
+                    <MainContainer style={{ marginBottom: "30px" }} key={index}>
                       <OrderInfocontainer
-                        courier={data.courier_used}
-                        status={data?.status?.current_status_type}
-                        orderDate={data?.order_created_at}
-                        orderId={data?.client_order_id}
-                        expectedDelivery={data?.edd_stamp}
-                        lastUpdate={data?.last_update_from_order_ms}
+                        courier={courier_used}
+                        status={status?.current_status_type}
+                        orderDate={order_created_at}
+                        orderId={client_order_id}
+                        expectedDelivery={edd_stamp}
+                        lastUpdate={last_update_from_order_ms}
                         isMultiOrder={isMultiOrder}
-                        itemList={data?.item_list}
-                        trackArr={data?.track_arr}
+                        itemList={item_list}
+                        trackArr={track_arr}
                         data={data}
+                        resData={trackingData}
                       />
-                    </div>
-                  )}
-                </div>
-              </div>
-            </MainContainer>
+                    </MainContainer>
+                  );
+                })
+              ) : (
+                <MainContainer style={{ marginBottom: "30px" }}>
+                  <OrderInfocontainer
+                    courier={data.courier_used}
+                    status={data?.status?.current_status_type}
+                    orderDate={data?.order_created_at}
+                    orderId={data?.client_order_id}
+                    expectedDelivery={data?.edd_stamp}
+                    lastUpdate={data?.last_update_from_order_ms}
+                    isMultiOrder={isMultiOrder}
+                    itemList={data?.item_list}
+                    trackArr={data?.track_arr}
+                    data={data}
+                    resData={data}
+                  />
+                </MainContainer>
+              )}
+            </div>
           )
         )}
         <PoweredContainer>Powered by Pickrr</PoweredContainer>
