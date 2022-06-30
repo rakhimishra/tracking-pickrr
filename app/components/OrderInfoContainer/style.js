@@ -52,6 +52,10 @@ export const Container = styled.div`
     color: #1c439f;
     font-weight: 400;
   }
+  .support_mobile {
+    position: absolute;
+    right: 240px;
+  }
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
@@ -77,6 +81,7 @@ export const Container = styled.div`
     }
     .support {
       font-size: 12px;
+      /* right: 90px; */
     }
   }
 `;
@@ -117,8 +122,6 @@ export const ViewButton = styled(Button)`
   border-radius: 10px !important;
   background-color: #0051bf !important;
   text-align: center !important;
-  .ant-btn-primary {
-  }
 `;
 
 export const StatusContainer = styled.div`

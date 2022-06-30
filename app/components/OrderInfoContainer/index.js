@@ -12,7 +12,7 @@ import {
   Stepper,
   ViewMore,
 } from "./style";
-import { CheckOrderStatus, Color } from "./utils";
+import { CheckOrderStatus, Color, icons } from "./utils";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import moment from "moment";
 import Feedback from "../Feeback";
@@ -27,19 +27,6 @@ const OrderItems = ({ title, content, css }) => {
       <div className="content">{content}</div>
     </OrderItem>
   );
-};
-
-const icons = {
-  NDR: "https://d10srchmli830n.cloudfront.net/1653565865471_254a535d-5d10-491b-8e14-4c764f67c868_Group-27878.svg",
-  DL: "https://d10srchmli830n.cloudfront.net/1653565931591_dea56aa1-7282-4cce-b881-01a0b11163a6_Vector-(2).svg",
-  RTO: "https://d10srchmli830n.cloudfront.net/1653565990655_f82a51ec-34ae-429c-8c5e-962691834a2d_Group-27880.svg",
-  RTD: "https://d10srchmli830n.cloudfront.net/1653565990655_f82a51ec-34ae-429c-8c5e-962691834a2d_Group-27880.svg",
-  OC: "https://d10srchmli830n.cloudfront.net/1653566478662_7159942a-b837-4bbf-a7f2-32f0b54e1e00_States---Popups-icons.svg",
-  OT: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
-  OP: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
-  OO: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
-  PP: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
-  SHP: "https://d10srchmli830n.cloudfront.net/1653566838817_22ede491-b980-4146-a07c-5220683f59dd_Vector-(3).svg",
 };
 
 const OrderInfocontainer = ({
@@ -73,6 +60,9 @@ const OrderInfocontainer = ({
     );
   }
 
+  var localTime = moment().format("YYYY-MM-DD"); // store localTime
+  var proposedDate = localTime + "T00:00:00.000Z";
+
   return (
     <div>
       <MainContainer>
@@ -104,7 +94,14 @@ const OrderInfocontainer = ({
               </div>
             )}
             <a href="mailto:support@pickrr.com?">
-              <div className="support" mail>
+              <div
+                className={
+                  expectedDelivery !== proposedDate && !isMobileDevice
+                    ? "support support_mobile"
+                    : "support"
+                }
+                mail
+              >
                 support@pickrr.com
               </div>
             </a>

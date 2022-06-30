@@ -38,10 +38,6 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "OP",
       status_array: [
         {
-          courier_status_code: "",
-          pickrr_status: "Order Placed",
-          pickrr_sub_status_code: "",
-          status_body: "Order Placed",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -51,10 +47,6 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "PP",
       status_array: [
         {
-          courier_status_code: "015-S",
-          pickrr_status: "Order Picked Up",
-          pickrr_sub_status_code: "",
-          status_body: "PICK UP SCAN ON FIELD",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -64,10 +56,6 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "SHP",
       status_array: [
         {
-          courier_status_code: "015-S",
-          pickrr_status: "SHIPMENT INSCAN",
-          pickrr_sub_status_code: "",
-          status_body: "PICK UP SCAN ON FIELD",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -77,10 +65,6 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "OT",
       status_array: [
         {
-          courier_status_code: "001-S",
-          pickrr_status: "Order in Transit",
-          pickrr_sub_status_code: "",
-          status_body: "SHIPMENT INSCAN",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -90,10 +74,6 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "OO",
       status_array: [
         {
-          courier_status_code: "001-S",
-          pickrr_status: "Shipment out for delivery",
-          pickrr_sub_status_code: "",
-          status_body: "SHIPMENT INSCAN",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -103,10 +83,6 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "DL",
       status_array: [
         {
-          courier_status_code: "001-S",
-          pickrr_status: "Delivered",
-          pickrr_sub_status_code: "",
-          status_body: "SHIPMENT INSCAN",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
