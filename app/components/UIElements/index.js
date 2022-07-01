@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button, Input } from "antd";
 import media from "./media";
+const { Search } = Input;
 
 const { TextArea } = Input;
 

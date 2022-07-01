@@ -11,7 +11,7 @@ export const loader = async ({ params }) => {
   const trackingId = params.index;
   try {
     const data = await getTrackingDetails(trackingId);
-    return data;
+    return { data, trackingId };
   } catch (error) {
     return error;
   }
@@ -20,10 +20,11 @@ export const loader = async ({ params }) => {
 function TrackingDetails() {
   const loaderData = useLoaderData();
   const [data, setData] = useState({
-    ...loaderData,
+    ...loaderData.data,
   });
+
   const [isLoading, setIsLoading] = useState(false);
-  const [trackingId, setTrackingId] = useState("");
+  const [trackingId, setTrackingId] = useState(loaderData.trackingId);
   const [isError, setIsError] = useState({
     errorStatus: false,
     message: "",
@@ -96,7 +97,7 @@ function TrackingDetails() {
                     last_update_from_order_ms,
                     item_list,
                     track_arr,
-                  } = trackingData;
+                  } = trackingData && trackingData;
                   return (
                     <MainContainer style={{ marginBottom: "30px" }} key={index}>
                       <OrderInfocontainer
@@ -111,6 +112,7 @@ function TrackingDetails() {
                         trackArr={track_arr}
                         data={data}
                         resData={trackingData}
+                        id={`brand${trackingData?.tracking_id}`}
                       />
                     </MainContainer>
                   );
@@ -129,6 +131,7 @@ function TrackingDetails() {
                     trackArr={data?.track_arr}
                     data={data}
                     resData={data}
+                    id={`brand${data?.tracking_id}`}
                   />
                 </MainContainer>
               )}

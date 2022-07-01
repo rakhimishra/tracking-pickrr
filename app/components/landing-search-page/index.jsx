@@ -37,9 +37,9 @@ function LandingSearchPage() {
             }}
             enterButton="Track"
             size="large"
-            onKeyDown={handleEnterKey}
             value={input}
             allowClear
+            onPressEnter={handleEnterKey}
           />
           <Link to={`/tracking/${input}`}>
             <CustomButton type="primary">Track Order</CustomButton>
