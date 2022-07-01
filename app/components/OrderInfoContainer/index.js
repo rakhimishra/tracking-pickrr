@@ -41,6 +41,7 @@ const OrderInfocontainer = ({
   trackArr,
   data,
   resData,
+  id,
 }) => {
   const isMobileDevice = useMediaQuery({
     query: "(max-device-width: 768px)",
@@ -148,19 +149,23 @@ const OrderInfocontainer = ({
         )}
       </MainContainer>
       {isMultiOrder && (
-        <div
-          style={{ textAlign: "center", marginTop: "-15px" }}
-          onClick={() => setIsViewMore(!isViewMore)}
-        >
-          <ViewButton type="primary" size="large">
-            {isViewMore ? "Hide" : "View"} Details{" "}
-            {isViewMore ? <UpOutlined /> : <DownOutlined />}
-          </ViewButton>
-        </div>
+        <a href={status === "DL" ? `#${id}` : null}>
+          <div
+            style={{ textAlign: "center", marginTop: "-15px" }}
+            onClick={() => {
+              setIsViewMore(!isViewMore);
+            }}
+          >
+            <ViewButton type="primary" size="large">
+              {isViewMore ? "Hide" : "View"} Details{" "}
+              {isViewMore ? <UpOutlined /> : <DownOutlined />}
+            </ViewButton>
+          </div>
+        </a>
       )}
       <div>{status == "DL" && <Feedback data={data} />}</div>
       {(isViewMore || (!isMultiOrder && !isViewMore)) && (
-        <StatusContainer>
+        <StatusContainer id={id}>
           <div className="stepper-container">
             <TimelineComp trackArr={trackArr && trackArr} />
           </div>

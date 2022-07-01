@@ -38,6 +38,7 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "OP",
       status_array: [
         {
+          pickrr_status: "Order Placed",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -47,6 +48,7 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "PP",
       status_array: [
         {
+          pickrr_status: "Order Picked Up",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -56,6 +58,7 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "SHP",
       status_array: [
         {
+          pickrr_status: "SHIPMENT INSCAN",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -65,6 +68,7 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "OT",
       status_array: [
         {
+          pickrr_status: "Order in Transit",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -74,6 +78,7 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "OO",
       status_array: [
         {
+          pickrr_status: "Shipment out for delivery",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
@@ -83,6 +88,8 @@ const TimelineComp = ({ trackArr }) => {
       status_name: "DL",
       status_array: [
         {
+          courier_status_code: "001-S",
+          pickrr_status: "Delivered",
           status_location: STATUS_LOC,
           status_time: STATUS_TIME,
         },
