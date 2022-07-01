@@ -97,7 +97,7 @@ function TrackingDetails() {
                     last_update_from_order_ms,
                     item_list,
                     track_arr,
-                  } = trackingData;
+                  } = trackingData && trackingData;
                   return (
                     <MainContainer style={{ marginBottom: "30px" }} key={index}>
                       <OrderInfocontainer
@@ -131,7 +131,7 @@ function TrackingDetails() {
                     trackArr={data?.track_arr}
                     data={data}
                     resData={data}
-                    id={`brand${trackingData?.tracking_id}`}
+                    id={`brand${data?.tracking_id}`}
                   />
                 </MainContainer>
               )}
