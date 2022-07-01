@@ -35,7 +35,6 @@ function LandingSearchPage() {
             onChange={(e) => {
               setInput(e.target.value);
             }}
-            enterButton="Track"
             size="large"
             value={input}
             allowClear
