@@ -31,7 +31,7 @@ const Feedback = ({ data }) => {
   const [type, setType] = useState(null);
   const [form] = Form.useForm();
 
-  const handleCompanySubmit = async () => {
+  const handleSubmit = async () => {
     if (!rating && !deliveryRating && !customerFeedback) {
       return message.warning("Please fill any of the fields");
     }
@@ -45,7 +45,7 @@ const Feedback = ({ data }) => {
     }
   };
 
-  const finalCompanySubmit = async (otp) => {
+  const finalSubmit = async (otp) => {
     const postData = {
       tracking_id: data.tracking_id,
       req_type: "verify_otp_post_data",
@@ -113,12 +113,11 @@ const Feedback = ({ data }) => {
         <FeedbackContainer>
           <div className="heading">
             How was your experience {company_name ? "with" : ""}{" "}
-            {company_name ? company_name : ""}
+            {company_name ? company_name.toLowerCase() : ""}
           </div>
           <Rate
             allowClear={false}
             value={rating}
-            // defaultValue={rating}
             style={{ color: "#717BAD", fontSize: "32px" }}
             onChange={(value) => {
               setRating(value);
@@ -196,7 +195,7 @@ const Feedback = ({ data }) => {
         <div style={{ textAlign: "center", padding: "28px 0px" }}>
           <SubmitButton
             className="button"
-            onClick={handleCompanySubmit}
+            onClick={handleSubmit}
             type={"primary"}
             loading={companySubmitLoading}
           >
@@ -207,7 +206,7 @@ const Feedback = ({ data }) => {
       <VerifyOTPModal
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
-        finalCompanySubmit={finalCompanySubmit}
+        finalSubmit={finalSubmit}
         sendOTP={sendOTP}
         phoneNumber={phoneNumber}
         modalLoading={modalLoading}

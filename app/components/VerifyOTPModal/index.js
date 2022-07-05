@@ -11,7 +11,7 @@ import {
 const VerifyOTPModal = ({
   isModalVisible,
   setIsModalVisible,
-  finalCompanySubmit,
+  finalSubmit,
   sendOTP,
   phoneNumber,
   modalLoading,
@@ -23,7 +23,7 @@ const VerifyOTPModal = ({
   };
 
   const handleVerify = () => {
-    finalCompanySubmit(otp);
+    finalSubmit(otp);
   };
 
   useEffect(() => {

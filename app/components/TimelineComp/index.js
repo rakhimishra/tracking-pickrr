@@ -13,6 +13,7 @@ import {
 import { Color } from "../OrderInfoContainer/utils";
 const TimelineComp = ({ trackArr }) => {
   const [currIndex, setCurrIndex] = useState(null);
+  console.log(trackArr, "trackarr");
 
   const validStatuses = [
     "OP",
@@ -111,15 +112,18 @@ const TimelineComp = ({ trackArr }) => {
 
   const difference = [...getDifference(arr, statusTobeShown)];
 
-  let parentArray = [...statusTobeShown, ...difference];
+  let parentArray = [...(statusTobeShown, []), ...difference];
   const cancelStatusExists = () => {
-    return statusTobeShown?.some(function (el) {
-      return (
-        el?.status_name === "OC" ||
-        el?.status_name === "RTO" ||
-        el?.status_name === "DL"
-      );
-    });
+    return (
+      statusTobeShown &&
+      statusTobeShown?.some(function (el) {
+        return (
+          el?.status_name === "OC" ||
+          el?.status_name === "RTO" ||
+          el?.status_name === "DL"
+        );
+      })
+    );
   };
   const actualArray = cancelStatusExists()
     ? statusTobeShown && statusTobeShown
