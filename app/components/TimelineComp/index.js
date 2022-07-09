@@ -112,7 +112,7 @@ const TimelineComp = ({ trackArr }) => {
 
   const difference = [...getDifference(arr, statusTobeShown)];
 
-  let parentArray = [...(statusTobeShown, []), ...difference];
+  let parentArray = [...statusTobeShown, ...difference];
   const cancelStatusExists = () => {
     return (
       statusTobeShown &&

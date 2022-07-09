@@ -98,6 +98,7 @@ function TrackingDetails() {
                     item_list,
                     track_arr,
                   } = trackingData && trackingData;
+
                   return (
                     <MainContainer style={{ marginBottom: "30px" }} key={index}>
                       <OrderInfocontainer

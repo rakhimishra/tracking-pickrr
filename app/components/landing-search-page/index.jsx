@@ -40,7 +40,7 @@ function LandingSearchPage() {
             allowClear
             onPressEnter={handleEnterKey}
           />
-          <Link to={`/tracking/${input}`}>
+          <Link to={`/tracking/${trackingId}`}>
             <CustomButton type="primary">Track Order</CustomButton>
           </Link>{" "}
         </div>
